@@ -35,7 +35,10 @@ Le site sera composé de :
 
 ## Mise en place du projet
 
-### Avec Github Codespace
+**Deux «environnements» possibles:** *(vous pouvez utiliser les deux
+simultanément)*
+
+### 1 - Avec Github Codespace
 
 - Soit dans le navigateur:
   - utiliser le bouton **Open in Github Codespaces** pour avoir un
@@ -47,7 +50,7 @@ Le site sera composé de :
   - -\> on current branch -\> les 3 petits points …
   - Open in Visual Studio Code
 
-### En local
+### 2 - En local
 
 - Ouvrez un terminal et placez vous dans un répertoire où vous souhaitez
   récupérer le projet.
@@ -62,7 +65,17 @@ Le site sera composé de :
   Composer](https://getcomposer.org/doc/00-intro.md), le gestionnaire de
   paquets PHP sur votre machine
 
-- Installer les librairies nécessaires et la configuration de base
+*Si Composer vous affiche des erreurs jaunes (Warnings), c'est que le
+module php zip n'est pas activé. Ouvrez le fichier php.ini (Par exemple
+`xampp/php/php.ini` pour Windows. Pour Linux, vous pouvez le chercher
+avec which php) puis décommenter la ligne ;extension=zip (il faut juste
+retirer le ; ), sauvegarde le fichier puis relancez l'installation de
+Laravel*
+
+### Dans les deux cas
+
+- (La première fois) Installer les librairies nécessaires et la
+  configuration de base
 
   ``` bash
   composer install
@@ -70,19 +83,12 @@ Le site sera composé de :
   php artisan key:generate
   ```
 
-*Lors de l'installation de Laravel, si Composer vous affiche des erreurs
-jaunes (Warnings), c'est que le module php zip n'est pas activé. Ouvrez
-le fichier php.ini (Par exemple `xampp/php/php.ini` pour Windows. Pour
-Linux, vous pouvez le chercher avec which php) puis décommenter la ligne
-;extension=zip (il faut juste retirer le ; ), sauvegarde le fichier puis
-relancez l'installation de Laravel*
+- Une fois le projet installé, placez vous dans le répertoire
+  nouvellement créé et entrez la commande suivante:
 
-Une fois le projet installé, placez vous dans le répertoire nouvellement
-créé et entrez la commande suivante:
-
-``` bash
-php artisan serve
-```
+  ``` bash
+  php artisan serve
+  ```
 
 Si l'installation s'est bien passée, vous devriez pouvoir accéder à
 votre projet à l'url suivante: <http://localhost:8000>
