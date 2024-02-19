@@ -17,7 +17,7 @@ rencontrés.
 
 Le site sera composé de :
 
-- **Une page d'Accueil** affichant un texte de bienvenue et les 3
+- **Une page d'accueil** affichant un texte de bienvenue et les 3
   dernières recettes
 - **La page recettes**, qui affichent une liste de toutes les recettes
   avec une barre de recherche
@@ -62,7 +62,7 @@ Le site sera composé de :
   Composer](https://getcomposer.org/doc/00-intro.md), le gestionnaire de
   paquets PHP sur votre machine
 
-- Installer les librairies necessaire et la configuration de base
+- Installer les librairies nécessaires et la configuration de base
 
   ``` bash
   composer install
@@ -163,8 +163,8 @@ nouveau.
 
 Le layout est maintenant créé.
 
-À partir de maintenant, lorsque lorsque l'on crée une vue qui doit
-utiliser ce layout, il faudra:
+À partir de maintenant, lorsque l'on crée une vue qui doit utiliser ce
+layout, il faudra:
 
 - Utiliser le code blade suivant: `@extends('layouts/main')` pour
   déclarer que votre vue doit utiliser ce layout
@@ -593,7 +593,7 @@ Pour afficher les données passées à la vue, il faut faire:
 Utilisez ce code pour compléter l'affichage des recettes sur la page
 d'accueil:
 
-- **Seuls les 3 dernières recettes** doivents être affichés
+- **Seuls les 3 dernières recettes** doivent être affichés
 - Pour l'affichage vous pouvez vous inspirer du le code en commentaire
   dans `main.blade.php`
 - Chaque titre de recipe doit être un lien du type:
