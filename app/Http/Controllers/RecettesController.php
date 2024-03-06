@@ -10,3 +10,4 @@ class RecettesController extends Controller
         return view('recettes');
     }
 }
+?>
