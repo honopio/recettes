@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+
+             //foreign key to reference id in users table
+             $table->foreign('user_id')
+             ->constrained();
+
+              //foreign key to reference id in recipes table
+            $table->foreign('recipe_id')
+            ->constrained();
+
+            $table->longText('content');
             $table->timestamps();
         });
     }
