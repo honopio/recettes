@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
 
             //foreign key to reference id in users table
-            $table->foreign('user_id')
-                ->constrained();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             //$table->unsignedBigInteger('owner_id')->default(0)->index('recipes_fk1_idx');
             $table->mediumText('title');
