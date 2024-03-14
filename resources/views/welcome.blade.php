@@ -23,4 +23,10 @@
             </div>
           </div>
 
+          <ul>
+            @foreach ( $recipes as $recipe )
+             <li>{{ $recipe->title }}</li>
+            @endforeach
+          </ul>
+
 @endsection

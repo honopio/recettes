@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class RecettesController extends Controller
 {
-    function index(){
+    function index() {
         return view('recettes');
     }
 }
