@@ -15,8 +15,10 @@
 
                 <div class="column is-4 mb-5">
                 <span><small class="has-text-grey-dark">{{ $recipe->updated_at }}</small></span>
-                //make this h2 a href pointing to " http://localhost:8000/recettes/une_recette", /une_recette/ being the url of the recipe
-                <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ $recipe->title }}</h2>
+                {{-- href to the recipe url. link made grey instead of blue --}}
+                <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">
+                    <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ $recipe->title }}</h2>
+                </a>
                 <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
                 <a href="#">Read More</a>
                 </div>
