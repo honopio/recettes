@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
 
             //foreign key to reference id in users table
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('set null');
 
-            //$table->unsignedBigInteger('owner_id')->default(0)->index('recipes_fk1_idx');
             $table->mediumText('title');
             $table->longText('content');
             $table->longText('ingredients');
@@ -25,7 +24,7 @@ return new class extends Migration
             $table->string('url', 200)->unique('url_UNIQUE');
             $table->text('tags')->nullable();
             $table->string('status', 45)->default('published');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
