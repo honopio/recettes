@@ -12,11 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-           /* $table->string('name', 100);
-            $table->string('email', 100);
-            $table->string('subject', 100);
-            $table->text('message');*/
+            $table->id('id');
+           /* //foreign key to reference id in users table
+            $table->foreignId('user_id')->constrained()->onDelete('set null');*/
+
+            //generate random mail addresses
+            $table->string('email');
+            $table->text('message');
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        //creation de 15 recettes aleatoires
         \App\Models\Recipe::factory()
             ->count(15)
             ->create()
@@ -30,5 +31,9 @@ class DatabaseSeeder extends Seeder
                 $recipe->user_id = \App\Models\User::inRandomOrder()->first()->id;
                 $recipe->save();
             });
+
+        // Creation de 10 contacts aleatoires
+        \App\Models\Contact::factory(10)->create();
+
     }
 }
