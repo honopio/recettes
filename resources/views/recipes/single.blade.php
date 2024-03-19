@@ -1,6 +1,6 @@
 @extends('layouts/main')
-
-@section('title', 'Recette')
+{{-- on décide de ne pas display de titre ici, vu qu'il y a deja le titre "Recettes" --}}
+@section('title', '')
 
 @section('content')
 
@@ -19,7 +19,7 @@
             </a>
             {{-- cherche dans la table user la colonne name.
                 possible pcq on a defini la relation entre recipe et user dans les modeles --}}
-            <p class="subtitle has-text-grey"><em>{{ $recipe->user->name }}</em></p>
+            <p class="subtitle has-text-grey"><em>par {{ $recipe->user->name }}</em></p>
             <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
         </div>
     </div>
