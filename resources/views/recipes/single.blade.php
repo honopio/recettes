@@ -1,4 +1,7 @@
 @extends('layouts/main')
+
+@section('title', 'Recette')
+
 @section('content')
 
 {{-- probablement pas de titre a afficher ?--}}
@@ -18,6 +21,7 @@
                 possible pcq on a defini la relation entre recipe et user dans les modeles --}}
             <p class="subtitle has-text-grey"><em>{{ $recipe->user->name }}</em></p>
             <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
-            <a href="#">Read More</a>
         </div>
     </div>
+
+@endsection

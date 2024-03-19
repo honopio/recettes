@@ -21,6 +21,8 @@ use App\Http\Controllers\HomeController;
     Route::get('/', [HomeController::class, 'index']);
 use App\Http\Controllers\ContactController;
     Route::get('/contact', [ContactController::class, 'index']);
+    Route::post('/contact', [ContactController::class, 'store']); //ajout de la route pour le formulaire de contact
 use App\Http\Controllers\RecettesController;
     Route::get('/recettes', [RecettesController::class, 'index']);
     Route::get('/recettes/{url}',[RecettesController::class, 'show']);
+

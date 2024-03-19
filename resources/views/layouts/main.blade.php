@@ -15,7 +15,7 @@
       <nav class="navbar py-4">
         <div class="container">
           <div class="navbar-brand">
-            <a class="navbar-item" href="#">
+            <a class="navbar-item" href="/">
               <span class="icon">
                 <i class="fas fa-utensils" style="font-size:26px; width:26px"></i>
               </span>

@@ -1,4 +1,7 @@
 @extends('layouts/main')
+
+@section('title', '')
+
 @section('content')
 
 
@@ -20,8 +23,12 @@
             <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">
                 <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ $recipe->title }}</h2>
             </a>
-            <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
-            <a href="#">Read More</a>
+            {{-- display les 50 premiers mots de content, puis "...". il faut clicker sur Read more pour voir la suite--}}
+            <p class= "subtitle has-text-grey">{{ Str::words($recipe->content, 50, '...') }}</p>
+
+            {{-- href to the recipe url : /recettes/url. link made grey instead of blue --}}
+
+            <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">Read More</a>
             </div>
 
         @endforeach
