@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
         // display a list of all recipes title and userid
         $recipes = Recipe::all(); //get all recipes
-        return view('admin.recettes',array(
+        return view('admin/recettes',array(
             'recipes' => $recipes
         ));
 
