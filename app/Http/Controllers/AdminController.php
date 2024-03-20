@@ -36,6 +36,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
+
     }
 
     /**
@@ -63,9 +64,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //update the recipe
+        $recipe = Recipe::find($id);
+           $recipe->title = $request->input('title');
+           $recipe->content = $request->input('content');
+           $recipe->ingredients = $request->input('ingredients');
+           $recipe->price = $request->input('price');
+           $recipe->save();
+        return redirect('/admin/recettes')->with('success', 'Vous avez modifié la recette !');
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -74,7 +81,7 @@ class AdminController extends Controller
         //delete $id recipe
         $recipe = Recipe::find($id);
         $recipe->delete();
-        return redirect('/admin/recettes');
+        return redirect('/admin/recettes')->with('success', 'Vous avez supprimé une recette !');
 
     }
 }

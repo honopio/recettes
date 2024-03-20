@@ -51,6 +51,9 @@
                 <input type="number" name="price" id="price" class="form-control" value="{{ $recipe->price }}" required>
             </div>
             <br>
+
+            <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Submit</button>
+
         </form>
     </div>
 @endsection

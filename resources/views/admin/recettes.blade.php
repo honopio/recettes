@@ -3,8 +3,14 @@
 @section('title', 'Admin Recettes')
 
 @section('content')
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+<br>
     <div class="container">
-        <h1>Liste des Recettes</h1>
+        <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Liste des Recettes</h1>
 
         <table class="table">
             <thead>
