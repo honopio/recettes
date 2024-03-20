@@ -26,7 +26,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        die('create');
+        // get to a create a new recipe page
+        return view('admin/create');
     }
 
     /**
@@ -50,7 +51,11 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // get to a a new page to edit the recipe
+        $recipe = Recipe::find($id);
+        return view('admin/edit',array(
+            'recipe' => $recipe
+        ));
     }
 
     /**
@@ -66,6 +71,10 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        //delete $id recipe
+        $recipe = Recipe::find($id);
+        $recipe->delete();
+        return redirect('/admin/recettes');
+
     }
 }
