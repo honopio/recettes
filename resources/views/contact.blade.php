@@ -17,7 +17,6 @@
         width: 80%; /* Set the width of the message textarea to 80% */
     }
 
-    /* Optional: Adjust other styling as needed */
 </style>
 <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Contact</h1>
 <br>
