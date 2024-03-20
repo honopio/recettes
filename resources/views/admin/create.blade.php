@@ -5,24 +5,41 @@
 @section('title', 'Admin Create Recette')
 
 @section('content')
+
+<style>
+    .form-group {
+        margin-bottom: 20px; /* Add space between each form group */
+    }
+
+    .subtitle {
+        display: block;
+    }
+
+    .message-textarea {
+        width: 80%; /* Set the width of the message textarea to 80% */
+    }
+
+</style>
+
     <div class="container">
-        <h1>Create Recipe</h1>
-        <form action="{{ route('recipes.store') }}" method="POST">
+        <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Créer la Recette</h1>
+
+        <form action="{{ route('recettes.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="title">Title</label>
+                <label for="title" class="subtitle has-text-grey">Title</label>
                 <input type="text" name="title" id="title" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="content">Content</label>
-                <textarea name="content" id="content" class="form-control" required></textarea>
+                <label for="content" class="subtitle has-text-grey">Content</label>
+                <textarea name="content" id="content" class="form-control message-textarea" required></textarea>
             </div>
             <div class="form-group">
-                <label for="ingredients">Ingredients</label>
-                <textarea name="ingredients" id="ingredients" class="form-control" required></textarea>
+                <label for="ingredients" class="subtitle has-text-grey">Ingredients</label>
+                <textarea name="ingredients" id="ingredients" class="form-control message-textarea" required></textarea>
             </div>
             <div class="form-group">
-                <label for="price">Price</label>
+                <label for="price" class="subtitle has-text-grey">Price</label>
                 <input type="number" name="price" id="price" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
