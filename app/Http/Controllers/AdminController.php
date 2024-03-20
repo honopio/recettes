@@ -1,39 +1,64 @@
- <?php
- namespace App\Http\Controllers;
+<?php
 
- use Illuminate\Http\Request;
- use App\Models\Recipe;
+namespace App\Http\Controllers;
 
- class AdminController extends Controller
- {
-    // permet l'affichage d'une liste complète des recettes
-    function index(){
-        $recipes = Recipe::all(); //get all recipes
+use Illuminate\Http\Request;
 
-        return view('admin',array(
-            'recipes' => $recipes
-        ));
+class AdminController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
     }
 
-    // permet l'ajout d'une recette
-    function add(){
-        return view('admin/add');
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
-    // permet l'édition d'une recette
-    public function edit($recipe_id) {
-        $recipe = \App\Models\Recipe::where('id',$recipe_id)->first(); //get first recipe with recipe_nam == $recipe_name
-
-        return view('admin/edit',array( //Pass the recipe to the view
-            'recipe' => $recipe
-        ));
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
-    // permet la suppression d'une recette.
-    public function delete($recipe_id) {
-        $recipe = \App\Models\Recipe::where('id',$recipe_id)->first(); //get first recipe with recipe_nam == $recipe_name
-        $recipe->delete();
-        return redirect('/admin');
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
     }
- }
-    ?>
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
