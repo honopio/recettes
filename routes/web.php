@@ -26,4 +26,4 @@ use App\Http\Controllers\RecettesController;
     Route::get('/recettes', [RecettesController::class, 'index']);
     Route::get('/recettes/{url}',[RecettesController::class, 'show']);
 use App\Http\Controllers\AdminController;
-    Route::resource('admin/recettes', RecettesController::class);
+    Route::resource('admin/recettes', AdminController::class);
