@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
+use App\Models\Recipe;
 
 class AdminController extends Controller
 {
@@ -12,7 +13,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        // display a list of all recipes title and userid
+        $recipes = Recipe::all(); //get all recipes
+        return view('admin.recettes.index',array(
+            'recipes' => $recipes
+        ));
+
     }
 
     /**
@@ -20,7 +26,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        die('create');
     }
 
     /**
