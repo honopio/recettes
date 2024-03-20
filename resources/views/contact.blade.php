@@ -25,7 +25,7 @@
     @csrf
 
     <div class="form-group">
-        <label for="name" class="subtitle has-text-grey">Name</label>
+        <label for="name" class="subtitle has-text-grey">Nom</label>
         <input type="text" name="name" id="name" class="form-control" required>
     </div>
     <br>
