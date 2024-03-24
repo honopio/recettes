@@ -26,6 +26,6 @@ class ContactController extends Controller
         $contact->email = request('email');
         $contact->message = request('message');
         $contact->save();
-        return back()->with('message', 'Votre message a bien été envoyé.');
+        return back()->with('success', 'Votre message a bien été envoyé.');
 }
 }

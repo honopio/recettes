@@ -28,11 +28,10 @@
             <p class="subtitle has-text-grey"><em>par {{ $recipe->user->name }}</em></p>
             {{-- display "ingredients : " et la liste des ingredients --}}
             <p class="subtitle has-text-grey">Ingredients : {{ $recipe->ingredients }}</p>
-            {{-- display les 50 premiers mots de content, puis "...". il faut clicker sur Read more pour voir la suite--}}
-            <p class= "subtitle has-text-grey">{{ Str::words($recipe->content, 50, '...') }}</p>
+            {{-- display les 250 premiers caractères de content, puis "...". il faut clicker sur Read more pour voir la suite--}}
+            <p class= "subtitle has-text-grey">{{ substr($recipe->content, 0, 250) }}...</p>
 
             {{-- href to the recipe url : /recettes/url. link made grey instead of blue --}}
-
             <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">Read More</a>
             </div>
 

@@ -4,6 +4,11 @@
 
 @section('content')
 
+@if (session('success'))
+    <div class="alert alert-success">
+        <p style="color: green; font-style: italic; font-size: 18px;">{{ session('success') }}</p>
+    </div>
+@endif
 <style>
     .form-group {
         margin-bottom: 20px; /* Add space between each form group */
@@ -25,21 +30,19 @@
 
     <div class="form-group">
         <label for="name" class="subtitle has-text-grey">Nom</label>
-        <input type="text" name="name" id="name" class="form-control" required>
+        <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" required>
     </div>
     <br>
     <div class="form-group">
         <label for="email" class="subtitle has-text-grey">Email</label>
-        <input type="email" name="email" id="email" class="form-control" required>
+        <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
     </div>
     <br>
     <div class="form-group">
         <label for="message" class="subtitle has-text-grey">Comment pouvons-nous vous aider?</label>
-        <textarea name="message" id="message" class="form-control message-textarea" required rows="5"></textarea>
+        <textarea name="message" id="message" class="form-control message-textarea" required rows="5">{{ old('message') }}</textarea>
     </div>
     <br>
     <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Submit</button>
 </form>
 @endsection
-
-

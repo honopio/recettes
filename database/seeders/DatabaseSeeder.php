@@ -35,5 +35,19 @@ class DatabaseSeeder extends Seeder
         // Creation de 10 contacts aleatoires
         \App\Models\Contact::factory(10)->create();
 
+        // create 20 comments
+        \App\Models\Comment::factory(20)->create()
+
+            //random user from the users table for each comment
+            ->each(function ($comment) {
+                $comment->user_id = \App\Models\User::inRandomOrder()->first()->id;
+                $comment->save();
+            })
+
+            //random recipe from the recipes table for each comment
+            ->each(function ($comment) {
+                $comment->recipe_id = \App\Models\Recipe::inRandomOrder()->first()->id;
+                $comment->save();
+            });
     }
 }
