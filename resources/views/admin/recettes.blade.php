@@ -1,14 +1,16 @@
 @extends('layouts/main')
 
-@section('title', 'Admin Recettes')
+@section('title', 'Ressources administrateur')
 
 @section('content')
 @if(session('success'))
 <div class="alert alert-success">
-    {{ session('success') }}
+    <p style="color: green; font-style: italic; font-size: 18px;">{{ session('success') }}</p>
 </div>
 @endif
 <br>
+<a href="{{ route('recettes.create') }}" class="btn btn-success">Ajouter une recette</a>
+<br><br>
     <div class="container">
         <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Liste des Recettes</h1>
 
@@ -43,6 +45,5 @@
             </tbody>
         </table>
 
-        <a href="{{ route('recettes.create') }}" class="btn btn-success">Add Recette</a>
     </div>
 @endsection

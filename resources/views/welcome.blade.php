@@ -25,7 +25,7 @@
                 {{-- display "ingredients : " et la liste des ingredients --}}
                 <p class="subtitle has-text-grey">Ingredients : {{ $recipe->ingredients }}</p>
                 <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
-                <a href="#">Read More</a>
+                <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">Read More</a>
                 </div>
 
             @endforeach

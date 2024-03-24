@@ -28,6 +28,7 @@ class AdminController extends Controller
     {
         // get to a create a new recipe page
         return view('admin/create');
+
     }
 
     /**
@@ -35,7 +36,25 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'ingredients' => 'required',
+            //price is a number, is min 0, and is not required
+            'price' => 'numeric|min:0'
+        ]);
 
+        //store the recipe
+        $recipe = new Recipe;
+        //QUEL USER ID METTRE?
+        $recipe->user_id = 1;
+        $recipe->title = $request->input('title');
+        $recipe->content = $request->input('content');
+        $recipe->ingredients = $request->input('ingredients');
+        $recipe->price = $request->input('price');
+        $recipe->url = $request->input('title');
+        $recipe->save();
+        return redirect('/admin/recettes')->with('success', 'Vous avez ajouté une recette avec succès');
 
     }
 
@@ -71,7 +90,7 @@ class AdminController extends Controller
            $recipe->ingredients = $request->input('ingredients');
            $recipe->price = $request->input('price');
            $recipe->save();
-        return redirect('/admin/recettes')->with('success', 'Vous avez modifié la recette !');
+        return redirect('/admin/recettes')->with('success', 'Vous avez modifié la recette avec succès');
     }
     /**
      * Remove the specified resource from storage.
@@ -81,7 +100,7 @@ class AdminController extends Controller
         //delete $id recipe
         $recipe = Recipe::find($id);
         $recipe->delete();
-        return redirect('/admin/recettes')->with('success', 'Vous avez supprimé une recette !');
+        return redirect('/admin/recettes')->with('success', 'Vous avez supprimé une recette avec succès');
 
     }
 }

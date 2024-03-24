@@ -2,7 +2,7 @@
 // the form contains fields for the title, content, ingredients, and price of the recipe
 @extends('layouts/main')
 
-@section('title', 'Admin Create Recette')
+@section('title', 'Création de recette')
 
 @section('content')
 

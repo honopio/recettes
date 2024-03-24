@@ -20,11 +20,12 @@ return new class extends Migration
             $table->mediumText('title');
             $table->longText('content');
             $table->longText('ingredients');
-            $table->string('price', 45)->default('Mid-range');
+            //price of the recipe
+            $table->integer('price')->unsigned();
             $table->string('url', 200)->unique('url_UNIQUE');
             $table->text('tags')->nullable();
             $table->string('status', 45)->default('published');
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 
