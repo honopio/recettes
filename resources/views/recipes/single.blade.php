@@ -79,7 +79,6 @@
                         </div>
                     </div>
                     <button type="submit" class="btn subtitle has-text-grey border-radius=5px">Envoyer</button>
-
                 </form>
             </div>
 

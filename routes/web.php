@@ -29,4 +29,8 @@ use App\Http\Controllers\CommentController;
     Route::post('/comment', [CommentController::class, 'store']);
 use App\Http\Controllers\AdminController;
     Route::resource('/admin/recettes', AdminController::class);
-
+/* Captcha controller - Problem de route
+use App\Http\Controllers\CaptchaController;
+    Route::get('/captcha', [CaptchaController::class, 'showForm']);
+    Route::post('/captcha', [CaptchaController::class, 'handleSubmit']);
+*/
