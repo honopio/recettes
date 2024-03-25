@@ -52,19 +52,19 @@ class DatabaseSeeder extends Seeder
             });
 
         //creation de 10 tags. hardcodés pour etre plus realistes
-        Tag::create(['name' => 'Vegan']);
-        Tag::create(['name' => 'Vegetarien']);
-        Tag::create(['name' => 'Asiatique']);
-        Tag::create(['name' => 'Chinois']);
-        Tag::create(['name' => 'Italien']);
-        Tag::create(['name' => 'Mexicain']);
-        Tag::create(['name' => 'Viande']);
-        Tag::create(['name' => 'Poisson']);
-        Tag::create(['name' => 'Salade']);
-        Tag::create(['name' => 'Soupe']);
-        Tag::create(['name' => 'Entrée']);
-        Tag::create(['name' => 'Plat']);
-        Tag::create(['name' => 'Dessert']);
+        Tag::create(['name' => 'vegan']);
+        Tag::create(['name' => 'vegetarien']);
+        Tag::create(['name' => 'asiatique']);
+        Tag::create(['name' => 'chinois']);
+        Tag::create(['name' => 'italien']);
+        Tag::create(['name' => 'mexicain']);
+        Tag::create(['name' => 'viande']);
+        Tag::create(['name' => 'poisson']);
+        Tag::create(['name' => 'salade']);
+        Tag::create(['name' => 'soupe']);
+        Tag::create(['name' => 'entrée']);
+        Tag::create(['name' => 'plat']);
+        Tag::create(['name' => 'dessert']);
 
         //ajouts de tags a des recetes dans la table de liaison recipe_tag
 
