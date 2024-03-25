@@ -78,7 +78,7 @@
     Quand formulaire soumis, il récupère la valeur et renvoie vers /tags/contenu_recherche  --}}
     <script>
         document.getElementById('search-form').addEventListener('submit', function() {
-          var searchInput = document.getElementById('search-input').value;
+          let searchInput = document.getElementById('search-input').value;
           this.action = "/tags/" + searchInput;
         });
       </script>

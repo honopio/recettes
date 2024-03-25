@@ -63,14 +63,15 @@
             <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
 
             {{-- display les tags. si pas de tags, affiche "pas de tags" --}}
-            <br>
             <p class="subtitle has-text-grey">
                 <strong><em>Tags</em></strong> :
                 @if ($recipe->tags->isEmpty())
                     <em>pas de tags</em>
                 @else
                     @foreach ($recipe->tags as $tag)
-                        <span class="tag">{{ $tag->name }}</span>
+                    <a href="{{ url('tags/' . $tag->name) }}">
+                        <span class="tag" >{{ $tag->name }}</span>
+                    </a>
                     @endforeach
                 @endif
             </p>

@@ -29,16 +29,18 @@
                 <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
 
                 {{-- display les tags. si pas de tags, affiche "pas de tags" --}}
-                <p class="subtitle has-text-grey">
-                    <strong><em>Tags</em></strong> :
-                    @if ($recipe->tags->isEmpty())
-                        <em>pas de tags</em>
-                    @else
-                        @foreach ($recipe->tags as $tag)
-                            <span class="tag">{{ $tag->name }}</span>
-                        @endforeach
-                    @endif
-                </p>
+            <p class="subtitle has-text-grey">
+                <strong><em>Tags</em></strong> :
+                @if ($recipe->tags->isEmpty())
+                    <em>pas de tags</em>
+                @else
+                    @foreach ($recipe->tags as $tag)
+                    <a href="{{ url('tags/' . $tag->name) }}">
+                        <span class="tag" >{{ $tag->name }}</span>
+                    </a>
+                    @endforeach
+                @endif
+            </p>
 
                 {{-- href vers l'url de la recette. lien rendu gris au lieu de bleu --}}
                 <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">Read More</a>

@@ -32,6 +32,7 @@
             {{-- display les 250 premiers caractères de content, puis "...". il faut clicker sur Read more pour voir la suite--}}
             <p class= "subtitle has-text-grey">{{ substr($recipe->content, 0, 250) }}...</p>
 
+
             {{-- display les tags. si pas de tags, affiche "pas de tags" --}}
             <p class="subtitle has-text-grey">
                 <strong><em>Tags</em></strong> :
@@ -39,7 +40,9 @@
                     <em>pas de tags</em>
                 @else
                     @foreach ($recipe->tags as $tag)
-                        <span class="tag">{{ $tag->name }}</span>
+                    <a href="{{ url('tags/' . $tag->name) }}">
+                        <span class="tag" >{{ $tag->name }}</span>
+                    </a>
                     @endforeach
                 @endif
             </p>

@@ -10,7 +10,9 @@ class TagController extends Controller
 {
     public function index()
     {
-        return view('tags/index');
+        // get les tags dans l'ordre alphabétique
+        $tags = Tag::orderBy('name')->get();
+        return view('tags/index', compact('tags'));
     }
 
     public function show($name)
