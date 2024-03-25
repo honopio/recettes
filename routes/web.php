@@ -38,3 +38,7 @@ use App\Http\Controllers\CaptchaController;
     Route::get('/captcha', [CaptchaController::class, 'showForm']);
     Route::post('/captcha', [CaptchaController::class, 'handleSubmit']);
 */
+
+use App\Http\Controllers\TagController;
+    Route::get('/tags', [TagController::class, 'index']);
+    Route::get('/tags/{name}', [TagController::class, 'searchByTag']);

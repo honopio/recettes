@@ -33,20 +33,26 @@
                  <a class="navbar-item" href="/contact">Contact</a>
                  <a class="navbar-item" href="/phpliteadmin.php">DBADMIN</a>
              </div>
-            <div class="navbar-item">
-              <div class="field has-addons">
-                <div class="control">
-                  <input class="input" type="search" placeholder="Search" aria-label="Search">
-                </div>
-                <div class="control">
-                  <button class="button" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke="currentColor" style="width: 24px;height: 24px">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                  </button>
-                </div>
+
+             {{-- search --}}
+             <div class="navbar-item">
+                {{-- FORMULAIRE A MODIFIER. PAS DACTION POUR LE MOMENT --}}
+                {{-- le formulaire doit renvoyer vers /tag/contenuRecherche avec la methode Get--}}
+                <form id="search-form" action="/tags/" method="GET">
+                    <div class="field has-addons">
+                      <div class="control">
+                        <input class="input" id="search-input" type="search" placeholder="Search by Tag" aria-label="Search" name="name">
+                      </div>
+                      <div class="control">
+                        <button id="search-button" class="button" type="submit">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px;height: 24px">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
               </div>
-            </div>
           </div>
         </div>
       </nav>
@@ -67,5 +73,14 @@
         </div>
       </section>
     </div>
+
+    {{-- JavaScript pour écouter l'événement de soumission du formulaire (barre de recherche).
+    Quand formulaire soumis, il récupère la valeur et renvoie vers /tags/contenu_recherche  --}}
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function() {
+          var searchInput = document.getElementById('search-input').value;
+          this.action = "/tags/" + searchInput;
+        });
+      </script>
 </body>
 </html>
