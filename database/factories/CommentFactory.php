@@ -20,7 +20,7 @@ class CommentFactory extends Factory
         return [
             'user_id' => User::inRandomOrder()->first()->id, // Get a random user ID,
             'recipe_id' => Recipe::inRandomOrder()->first()->id, // Get a random recipe ID,
-            'content' => $this->faker->paragraph($nbSentences = 1, $variableNbSentences = true),
+            'content' => $this->faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         ];
     }
 }

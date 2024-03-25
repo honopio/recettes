@@ -23,7 +23,7 @@
                 possible pcq on a defini la relation entre recipe et user dans les modeles --}}
                 <p class="subtitle has-text-grey"><em>par {{ $recipe->user->name }}</em></p>
                 {{-- display "ingredients : " et la liste des ingredients --}}
-                <p class="subtitle has-text-grey">Ingredients : {{ $recipe->ingredients }}</p>
+                <p class="subtitle has-text-grey"><strong>Ingredients : {{ $recipe->ingredients }}</strong></p>
                 <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
                 <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">Read More</a>
                 </div>

@@ -27,7 +27,7 @@
                 possible pcq on a defini la relation entre recipe et user dans les modeles --}}
             <p class="subtitle has-text-grey"><em>par {{ $recipe->user->name }}</em></p>
             {{-- display "ingredients : " et la liste des ingredients --}}
-            <p class="subtitle has-text-grey">Ingredients : {{ $recipe->ingredients }}</p>
+            <p class="subtitle has-text-grey"><strong>Ingredients : {{ $recipe->ingredients }}</strong></p>
             {{-- display les 250 premiers caractères de content, puis "...". il faut clicker sur Read more pour voir la suite--}}
             <p class= "subtitle has-text-grey">{{ substr($recipe->content, 0, 250) }}...</p>
 
