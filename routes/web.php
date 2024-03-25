@@ -25,6 +25,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RecettesController;
     Route::get('/recettes', [RecettesController::class, 'index']);
     Route::get('/recettes/{url}',[RecettesController::class, 'show']);
+use App\Http\Controllers\CommentController;
+    Route::post('/comment', [CommentController::class, 'store']);
 use App\Http\Controllers\AdminController;
     Route::resource('/admin/recettes', AdminController::class);
 

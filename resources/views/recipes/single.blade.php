@@ -62,6 +62,7 @@
     </div>
     <br><br>
 
+
     <div class="columns is-multiline">
         <div class="column is-offset-1 is-10">
             {{-- commentaires, avec entre parenthèses le nb de commentaires à afficher --}}
@@ -82,6 +83,12 @@
                 </form>
             </div>
 
+            @if (session('success'))
+            <div class="alert alert-success">
+                <p style="color: green; font-style: italic; font-size: 18px;">{{ session('success') }}</p>
+            </div>
+            @endif
+            <br>
 
             {{-- if the user is not logged in, display a message --}}
             {{-- @if ( !Auth::check() )

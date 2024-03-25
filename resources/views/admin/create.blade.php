@@ -1,5 +1,5 @@
-// a form webpage where the administrator can create a new recipe and save it in the database
-// the form contains fields for the title, content, ingredients, and price of the recipe
+{{-- a form webpage where the administrator can create a new recipe and save it in the database
+the form contains fields for the title, content, ingredients, and price of the recipe --}}
 @extends('layouts/main')
 
 @section('title', 'Création de recette')
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="content" class="subtitle has-text-grey">Content</label>
-                <textarea name="content" id="content" class="form-control message-textarea" required></textarea>
+                <textarea name="content" id="content" class="form-control message-textarea" required required rows="10"></textarea>
             </div>
             <div class="form-group">
                 <label for="ingredients" class="subtitle has-text-grey">Ingredients</label>
@@ -42,7 +42,7 @@
                 <label for="price" class="subtitle has-text-grey">Price</label>
                 <input type="number" name="price" id="price" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <br><button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Ajouter</button>
         </form>
     </div>
 @endsection
