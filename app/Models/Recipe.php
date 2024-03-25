@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Tag;
 
 class Recipe extends Model
 {
@@ -23,5 +24,14 @@ class Recipe extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * The tags that belong to the recipe.
+     * Many to many relationship so we don't have to create a model for the recipe_tag table
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

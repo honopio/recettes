@@ -25,8 +25,6 @@ class RecipeFactory extends Factory
          'ingredients' => $this->faker->vegetableName().", ".$this->faker->meatName(),
          'price' => $this->faker->words($nb = 1, $asText = true),
          'url' => str_replace(' ', '-', $title),
-         //50% chance of the recipe having tags. if so, between 1 and 5 tags are generated
-         'tags' => $this->faker->boolean(50) ? $this->faker->words($nb = $this->faker->numberBetween(1, 5), $asText = true) : null,
          'status' => 'published',
         ];
     }
