@@ -1,6 +1,8 @@
 ## Guide d'installation du projet 
 avec toutes les commandes à exécuter et les fichiers à configurer : git clone ... , composer install, npm install, modification du fichier .env, lancement des migrations, lancement du ou des serveurs, etc. 
 
+composer require mews/captcha
+
 ## Parties implémentées
 - Gestion des commentaires: formulaire + affichage liste
 TODO : AJAX + Captcha + Admin
