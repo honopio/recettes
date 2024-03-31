@@ -10,7 +10,19 @@ avec toutes les commandes à exécuter et les fichiers à configurer : git clone
 ### Captcha Service Provider
     composer require mews/captcha
 
-## Lancement du serveur
+## Setup Sqlite
+    DB_DATABASE=/ABSOLUTE_PATH/database/database.sqlite
+    # DB_CONNECTION=mysql
+    # DB_HOST=127.0.0.1
+    # DB_PORT=3306
+    # DB_DATABASE=larasite
+    # DB_USERNAME=root
+    # DB_PASSWORD=ic2a
+
+### Lancement des migrations
+    php artisan migrate
+
+### Lancement du serveur
     php artisan serve
 
 ## Parties implémentées

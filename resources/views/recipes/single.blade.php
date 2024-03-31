@@ -70,19 +70,20 @@
 
             <div class="formulaire">
                 <form action="{{ url('comment') }}" method="post">
-                    @csrf
+                    @csrf {{-- token de sécurité --}}
+                    {{-- champ caché pour envoyer l'id de la recette avec le commentaire --}}
                     <input type="hidden" name="recipe_id" value="{{ $recipe->id }}">
                     <div class="field">
-                        <div class="control">
+                        <div class="control"> {{-- champ pour le contenu du commentaire --}}
                             <label class=subtitle>Ajoutez un commentaire</label><br>
                             <textarea class="textarea" name="content" placeholder="Ecrivez votre commentaire"></textarea>
                         </div>
-                    </div>
+                    </div> {{-- bouton pour envoyer le commentaire --}}
                     <button type="submit" class="btn subtitle has-text-grey border-radius=5px">Envoyer</button>
                 </form>
             </div>
 
-            @if (session('success'))
+            @if (session('success')) {{-- si le commentaire a bien été ajouté, afficher un message de succès --}}
             <div class="alert alert-success">
                 <p style="color: green; font-style: italic; font-size: 18px;">{{ session('success') }}</p>
             </div>

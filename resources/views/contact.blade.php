@@ -4,7 +4,7 @@
 
 @section('content')
 
-@if (session('success'))
+@if (session('success')) <!-- Display a success message if the form was successfully submitted -->
     <div class="alert alert-success">
         <p style="color: green; font-style: italic; font-size: 18px;">{{ session('success') }}</p>
     </div>
@@ -56,21 +56,21 @@
 <form method="POST" action="/contact">
     @csrf
 
-    <div>
+    <div> <!-- Name input field -->
         <label for="name" class="subtitle has-text-grey">Nom</label>
         <input type="text" name="name" id="name" class="form-control box" value="{{ old('name') }}" required>
     </div>
     <br>
-    <div>
+    <div> <!-- Email input field -->
         <label for="email" class="subtitle has-text-grey">Email</label>
         <input type="email" name="email" id="email" class="form-control box" value="{{ old('email') }}" required>
     </div>
     <br>
-    <div>
+    <div> <!-- Message textarea -->
         <label for="message" class="subtitle has-text-grey">Comment pouvons-nous vous aider?</label>
         <textarea name="message" id="message" class="form-control textarea box" required rows="5">{{ old('message') }}</textarea>
     </div>
-    <br>
+    <br> <!-- Submit button -->s
     <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Submit</button>
 </form>
 @endsection

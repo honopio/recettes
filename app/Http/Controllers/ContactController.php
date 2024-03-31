@@ -7,7 +7,7 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    function index(){
+    function index(){ //loads the contact form template in the view
         return view('contact');
     }
     //ajout de la fonction store pour le formulaire de contact
@@ -20,7 +20,7 @@ class ContactController extends Controller
         return back()->with('message', 'Votre message a bien été envoyé.');
     }*/
 
-    function store() {
+    function store() { //store the contact form data
         $contact = new Contact();
       //  $contact->nom = request('nom');
         $contact->email = request('email');
