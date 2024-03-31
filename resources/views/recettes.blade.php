@@ -4,8 +4,6 @@
 
 @section('content')
 
-
-<h1 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">Toutes les recettes : </h1>
 <br>
 {{-- if recipes is undefined or empty --}}
 @if ( !isset($recipes) || $recipes->isEmpty() )

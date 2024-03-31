@@ -8,10 +8,6 @@ use App\Models\Recipe;
 class RecettesController extends Controller
 {
     function index(){
-       /* $recipes = Recipe::all(); //get all recipes
-
-        return view('recettes',array(
-            'recipes' => $recipes*/
         // Get all recipes with their associated tags
         $recipes = Recipe::with('tags')->get();
 
@@ -33,7 +29,14 @@ class RecettesController extends Controller
 
     public function search(Request $request) {
         $search = $request->input('recipe');
+
+        //search for recipes with the search term in the title or in the tags
         $recipes = Recipe::where('title', 'like', '%'.$search.'%')->get();
+
+        //add the recipes with the search term in the tags
+        $recipes = $recipes->merge(Recipe::whereHas('tags', function($q) use ($search) {
+            $q->where('name', 'like', '%'.$search.'%');
+        })->get());
 
        //return the recettes view with the recipes
          return view('recettes', compact('recipes'));
