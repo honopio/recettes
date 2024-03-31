@@ -31,7 +31,7 @@ use App\Http\Controllers\AdminController;
     Route::resource('/admin/recettes', AdminController::class);
 use App\Http\Controllers\CaptchaServiceController;
     Route::get('/captcha', [CaptchaServiceController::class, 'index']);
-    Route::post('/captcha', [CaptchaServiceController::class, 'capthcaFormValidate']);
+    Route::post('/captcha', [CaptchaServiceController::class, 'captchaFormValidate']);
     Route::get('/reload-captcha', [CaptchaServiceController::class, 'reloadCaptcha']);
 /* Captcha controller - Problem de route
 use App\Http\Controllers\CaptchaController;
