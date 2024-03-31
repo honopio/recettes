@@ -12,7 +12,6 @@ class RecettesController extends Controller
 
         return view('recettes',array(
             'recipes' => $recipes*/
-
         // Get all recipes with their associated tags
         $recipes = Recipe::with('tags')->get();
 
@@ -30,6 +29,14 @@ class RecettesController extends Controller
         //methode compact pour passer plusieurs variables à la vue
         return view('recipes/single', compact('recipe', 'tags'));
 
+    }
+
+    public function search(Request $request) {
+        $search = $request->input('recipe');
+        $recipes = Recipe::where('title', 'like', '%'.$search.'%')->get();
+
+       //return the recettes view with the recipes
+         return view('recettes', compact('recipes'));
     }
 }
 ?>

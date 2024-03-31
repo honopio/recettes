@@ -36,12 +36,12 @@
 
              {{-- search --}}
              <div class="navbar-item">
-                {{-- FORMULAIRE A MODIFIER. PAS DACTION POUR LE MOMENT --}}
-                {{-- le formulaire doit renvoyer vers /tag/contenuRecherche avec la methode Get--}}
-                <form id="search-form" action="/tags/" method="GET">
-                    <div class="field has-addons">
+
+                {{-- formulaire pour la search bar --}}
+                <form id="search-form" action="/recettes/search" method="GET">
+                    <div class="field has-addons
                       <div class="control">
-                        <input class="input" id="search-input" type="search" placeholder="Search by Tag" aria-label="Search" name="name">
+                        <input class="input" id="search-input" type="search" placeholder="Search" aria-label="Search" name="recipe">
                       </div>
                       <div class="control">
                         <button id="search-button" class="button" type="submit">
@@ -74,13 +74,5 @@
       </section>
     </div>
 
-    {{-- JavaScript pour écouter l'événement de soumission du formulaire (barre de recherche).
-    Quand formulaire soumis, il récupère la valeur et renvoie vers /tags/contenu_recherche  --}}
-    <script>
-        document.getElementById('search-form').addEventListener('submit', function() {
-          let searchInput = document.getElementById('search-input').value;
-          this.action = "/tags/" + searchInput;
-        });
-      </script>
 </body>
 </html>

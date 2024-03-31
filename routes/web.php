@@ -24,6 +24,7 @@ use App\Http\Controllers\ContactController;
     Route::post('/contact', [ContactController::class, 'store']); //ajout de la route pour le formulaire de contact
 use App\Http\Controllers\RecettesController;
     Route::get('/recettes', [RecettesController::class, 'index']);
+    Route::get('/recettes/search', [RecettesController::class, 'search']);
     Route::get('/recettes/{url}',[RecettesController::class, 'show']);
 use App\Http\Controllers\CommentController;
     Route::post('/comment', [CommentController::class, 'store']);
