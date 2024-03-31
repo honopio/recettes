@@ -22,7 +22,6 @@ class RecipeFactory extends Factory
          'user_id' => User::inRandomOrder()->first()->id, // Get a random user ID,
          'title' => $title,
          'content' => $this->faker->paragraph($nbSentences = 10, $variableNbSentences = true),
-         'ingredients' => $this->faker->vegetableName().", ".$this->faker->meatName(),
          'price' => $this->faker->words($nb = 1, $asText = true),
          'url' => str_replace(' ', '-', $title),
          'status' => 'published',

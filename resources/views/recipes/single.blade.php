@@ -56,10 +56,17 @@
             {{-- cherche dans la table user la colonne name. --}}
             <p class="subtitle has-text-grey"><em>par {{ $recipe->user->name }}</em></p>
 
-            {{-- display la liste des ingredients --}}
-            <p class="subtitle has-text-grey"><strong><em>Ingredients</em></strong> : {{ $recipe->ingredients }}</p>
-
+            {{-- display la liste des ingredients. de la table ingredient_recipe --}}
+            <span class="subtitle has-text-grey"><strong><em>Ingredients</em></strong> :</span>
+            @foreach ($recipe->ingredients as $key => $ingredient)
+                <span class="subtitle has-text-grey">{{ $ingredient->name }}</span>
+                {{-- ajoute une virgule entre les ingredients, sauf si c'est le dernier --}}
+                @if (!$loop->last)
+                    <span class="subtitle has-text-grey">,</span>
+                @endif
+            @endforeach
             {{-- display le contenu de la recette --}}
+            <br><br>
             <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
 
             {{-- display les tags. si pas de tags, affiche "pas de tags" --}}

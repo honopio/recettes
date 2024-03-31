@@ -8,17 +8,18 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     * Table de jointure entre recipes et tags
+     * Table de jointure entre recipes et ingredients
      */
     public function up(): void
     {
-        Schema::create('recipe_tag', function (Blueprint $table) {
-            //no need for an id. On utilise les clés primaires des deux tables
+        Schema::create('ingredient_recipe', function (Blueprint $table) {
+            //pas besoin d'id. On utilise les clés primaires des deux tables
             $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
-            $table->foreignId('tag_id')->constrained()->onDelete('cascade');
-            $table->unique(['recipe_id', 'tag_id']);
+            $table->foreignId('ingredient_id')->constrained()->onDelete('cascade');
+            $table->unique(['recipe_id', 'ingredient_id']);
 
             //no timestamps or any other metadata. if we did add metadata, we would have to create a factory for this table
+
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recipe_tag');
+        Schema::dropIfExists('ingredient_recipe');
     }
 };

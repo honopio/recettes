@@ -13,16 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //creation de 10 users aleatoires
+        /* ---------- creation de 10 users aleatoires ------------- */
         \App\Models\User::factory(10)->create();
 
-        //creation d'un user unique
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        //creation de 15 recettes aleatoires
+        /* ---------- creation de 15 recettes aleatoires ------------ */
         \App\Models\Recipe::factory()
             ->count(15)
             ->create()
@@ -33,10 +27,11 @@ class DatabaseSeeder extends Seeder
                 $recipe->save();
             });
 
-        // Creation de 10 contacts aleatoires
+        /* ---------- creation de 10 contacts aleatoires ------------- */
         \App\Models\Contact::factory(10)->create();
 
-        // create 20 comments
+        /* ---------- creation de 20 commentaires aleatoires ------------- */
+
         \App\Models\Comment::factory(20)->create()
 
             //random user from the users table for each comment
@@ -51,7 +46,7 @@ class DatabaseSeeder extends Seeder
                 $comment->save();
             });
 
-        //creation de 10 tags. hardcodés pour etre plus realistes
+        /* ---------- creation de 10 tags. hardcodes pour etre realistes ---------- */
         Tag::create(['name' => 'vegan']);
         Tag::create(['name' => 'vegetarien']);
         Tag::create(['name' => 'asiatique']);
@@ -66,12 +61,20 @@ class DatabaseSeeder extends Seeder
         Tag::create(['name' => 'plat']);
         Tag::create(['name' => 'dessert']);
 
-        //ajouts de tags a des recetes dans la table de liaison recipe_tag
-
-        //fetch toutes les recettes et leur attache entre 0 et 4 tags
+        /* ----------- ajouts de tags a des recettes dans la table de liaison recipe_tag
+        fetch toutes les recettes et leur attache entre 0 et 4 tags existants ---------------*/
         \App\Models\Recipe::all()->each(function ($recipe) {
             $tags = Tag::inRandomOrder()->limit(3)->get();
             $recipe->tags()->attach($tags);
+        });
+
+        /* ---------- creation de 20 ingredients aleatoires ---------- */
+        \App\Models\Ingredient::factory(20)->create();
+
+        /* ----------- ajouts d'ingredients a des recettes dans la table de liaison ingredient_recipe ---------- */
+        \App\Models\Recipe::all()->each(function ($recipe) {
+            $ingredients = \App\Models\Ingredient::inRandomOrder()->limit(3)->get();
+            $recipe->ingredients()->attach($ingredients);
         });
 
 

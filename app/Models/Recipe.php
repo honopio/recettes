@@ -28,10 +28,19 @@ class Recipe extends Model
 
     /**
      * The tags that belong to the recipe.
-     * Many to many relationship so we don't have to create a model for the recipe_tag table
+     * it's a many to many relationship -> we don't have to create a model for the recipe_tag table
      */
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * The ingredients that belong to the recipe.
+     * It's a many to many relationship -> we don't have to create a model for the ingredient_recipe table
+     */
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class);
     }
 }
