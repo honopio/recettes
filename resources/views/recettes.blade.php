@@ -1,5 +1,5 @@
 @extends('layouts/main')
-{{-- on décide de ne pas display de titre ici, vu qu'il y a deja le titre "Recettes" --}}
+{{-- on décide de ne pas afficher de titre ici, vu qu'il y a deja le titre "Recettes" --}}
 @section('title', '')
 
 @section('content')
