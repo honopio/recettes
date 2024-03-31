@@ -1,7 +1,17 @@
 ## Guide d'installation du projet 
 avec toutes les commandes à exécuter et les fichiers à configurer : git clone ... , composer install, npm install, modification du fichier .env, lancement des migrations, lancement du ou des serveurs, etc. 
 
-composer require mews/captcha
+### Clone du git, Gestionnaire de dependances, environnement de travail et generation de l'application key 
+    git clone git@github.com:MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git
+    composer install    
+    cp .env.example .env    
+    php artisan key:generate
+
+### Captcha Service Provider
+    composer require mews/captcha
+
+## Lancement du serveur
+    php artisan serve
 
 ## Parties implémentées
 - Gestion des commentaires: formulaire + affichage liste
