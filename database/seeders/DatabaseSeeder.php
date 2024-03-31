@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Tag;
 
 class DatabaseSeeder extends Seeder
 {
@@ -49,5 +50,31 @@ class DatabaseSeeder extends Seeder
                 $comment->recipe_id = \App\Models\Recipe::inRandomOrder()->first()->id;
                 $comment->save();
             });
+
+        //creation de 10 tags. hardcodés pour etre plus realistes
+        Tag::create(['name' => 'vegan']);
+        Tag::create(['name' => 'vegetarien']);
+        Tag::create(['name' => 'asiatique']);
+        Tag::create(['name' => 'chinois']);
+        Tag::create(['name' => 'italien']);
+        Tag::create(['name' => 'mexicain']);
+        Tag::create(['name' => 'viande']);
+        Tag::create(['name' => 'poisson']);
+        Tag::create(['name' => 'salade']);
+        Tag::create(['name' => 'soupe']);
+        Tag::create(['name' => 'entrée']);
+        Tag::create(['name' => 'plat']);
+        Tag::create(['name' => 'dessert']);
+
+        //ajouts de tags a des recetes dans la table de liaison recipe_tag
+
+        //fetch toutes les recettes et leur attache entre 0 et 4 tags
+        \App\Models\Recipe::all()->each(function ($recipe) {
+            $tags = Tag::inRandomOrder()->limit(3)->get();
+            $recipe->tags()->attach($tags);
+        });
+
+
+
     }
 }

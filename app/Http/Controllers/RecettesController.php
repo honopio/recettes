@@ -8,18 +8,35 @@ use App\Models\Recipe;
 class RecettesController extends Controller
 {
     function index(){
-        $recipes = Recipe::all(); //get all recipes
+       /* $recipes = Recipe::all(); //get all recipes
 
         return view('recettes',array(
-            'recipes' => $recipes
-        ));}
+            'recipes' => $recipes*/
+        // Get all recipes with their associated tags
+        $recipes = Recipe::with('tags')->get();
+
+        //methode compact pour passer plusieurs variables à la vue
+        return view('recettes', compact('recipes'));
+    }
 
     public function show($recipe_url) {
-        $recipe = \App\Models\Recipe::where('url',$recipe_url)->first(); //get first recipe with recipe_nam == $recipe_name
+        $recipe = Recipe::where('url',$recipe_url)->first(); //get first recipe with recipe_nam == $recipe_name
         // LOAD CAPTCHA QUESTION ? $captchaQuestion = $this->generateCaptchaQuestion();
-        return view('recipes/single',array( //Pass the recipe to the view
-            'recipe' => $recipe
-        ));
+
+        // Fetch tags associated with the recipe
+        $tags = $recipe->tags()->pluck('name');
+
+        //methode compact pour passer plusieurs variables à la vue
+        return view('recipes/single', compact('recipe', 'tags'));
+
+    }
+
+    public function search(Request $request) {
+        $search = $request->input('recipe');
+        $recipes = Recipe::where('title', 'like', '%'.$search.'%')->get();
+
+       //return the recettes view with the recipes
+         return view('recettes', compact('recipes'));
     }
 }
 ?>

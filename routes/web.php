@@ -24,7 +24,8 @@ use App\Http\Controllers\ContactController;
     Route::post('/contact', [ContactController::class, 'store']); //route pour le formulaire de contact
 use App\Http\Controllers\RecettesController;
     Route::get('/recettes', [RecettesController::class, 'index']); //route pour afficher toutes les recettes
-    Route::get('/recettes/{url}',[RecettesController::class, 'show']); //route pour afficher une recette
+    Route::get('/recettes/search', [RecettesController::class, 'search']); //route pour la recherche de recettes
+    Route::get('/recettes/{url}',[RecettesController::class, 'show']); //route pour afficher une seule recette
 use App\Http\Controllers\CommentController;
     Route::post('/comment', [CommentController::class, 'store']); //route pour le formulaire de commentaire
 use App\Http\Controllers\AdminController;
@@ -39,3 +40,7 @@ use App\Http\Controllers\CaptchaController;
     Route::get('/captcha', [CaptchaController::class, 'showForm']);
     Route::post('/captcha', [CaptchaController::class, 'handleSubmit']);
 */
+
+use App\Http\Controllers\TagController;
+    Route::get('/tags', [TagController::class, 'index']);
+    Route::get('/tags/{name}', [TagController::class, 'searchByTag']);

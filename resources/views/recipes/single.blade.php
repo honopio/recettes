@@ -48,16 +48,34 @@
             classe is-10 : la div prend 10 colonnes de large sur 12--}}
         <div class="column is-offset-1 is-10">
             <span><small class="has-text-grey-dark">{{ $recipe->updated_at }}</small></span>
-            {{-- href to the recipe url. link made grey instead of blue --}}
+
+            {{-- titre : href vers la recette. lien gris, pas bleu--}}
             <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">
                 <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ $recipe->title }}</h2>
             </a>
-            {{-- cherche dans la table user la colonne name.
-                possible pcq on a defini la relation entre recipe et user dans les modeles --}}
+            {{-- cherche dans la table user la colonne name. --}}
             <p class="subtitle has-text-grey"><em>par {{ $recipe->user->name }}</em></p>
-            {{-- display "ingredients : " et la liste des ingredients --}}
-            <p class="subtitle has-text-grey"><strong>Ingredients : {{ $recipe->ingredients }}</strong></p>
+
+            {{-- display la liste des ingredients --}}
+            <p class="subtitle has-text-grey"><strong><em>Ingredients</em></strong> : {{ $recipe->ingredients }}</p>
+
+            {{-- display le contenu de la recette --}}
             <p class="subtitle has-text-grey">{{ $recipe->content }}</p>
+
+            {{-- display les tags. si pas de tags, affiche "pas de tags" --}}
+            <p class="subtitle has-text-grey">
+                <strong><em>Tags</em></strong> :
+                @if ($recipe->tags->isEmpty())
+                    <em>pas de tags</em>
+                @else
+                    @foreach ($recipe->tags as $tag)
+                    <a href="{{ url('tags/' . $tag->name) }}">
+                        <span class="tag" >{{ $tag->name }}</span>
+                    </a>
+                    @endforeach
+                @endif
+            </p>
+
         </div>
     </div>
     <br><br>
