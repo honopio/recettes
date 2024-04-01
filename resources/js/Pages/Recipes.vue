@@ -15,11 +15,10 @@
           <!-- Loop through each recipe -->
           <div class="column is-4 mb-5" v-for="recipe in recipes" :key="recipe.id">
             <span><small class="has-text-grey-dark">{{ recipe.updated_at }}</small></span>
-            <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ recipe.title }}</h2>
-            <!-- Link to the recipe URL -->
-            <Link class="has-text-grey-dark" :href="`/recettes/${recipe.url}`">
-              <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ recipe.title }}</h2>
+            <Link :href="`/recettes/${recipe.url}`" class="has-text-grey-dark">
+                <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ recipe.title }}</h2>
             </Link>
+
             <!-- Display the user who created the recipe. "user" a été passé dans le controller -->
             <p class="subtitle has-text-grey"><em>par {{ recipe.user.name }}</em></p>
 
@@ -48,7 +47,7 @@
             </p>
 
             <!-- Link to the recipe URL -->
-            <Link class="has-text-grey-dark" :href="`/recettes/${recipe.url}`">Lire en entier</Link>
+            <Link class="has-text-grey-dark" :href="`/recettes/${recipe.url}`"><em>> Lire en entier <</em></Link>
           </div>
         </div>
       </template>
@@ -57,12 +56,18 @@
   </template>
 
   <script>
-  import Layout from './Layout.vue'
-    import Link from '@inertiajs/inertia-vue3'
+//   import Link from '@inertiajs/inertia-vue3';
+  import Layout from './Layout.vue';
+ import { Link } from '@inertiajs/inertia-vue3';
+//  import { Link } from 'vue-router' //finalement j'utilise pas ça
+
+
 
   export default {
+    name: 'Recipes.vue',
     components: {
-        Layout
+        Link,
+        Layout,
     },
     props: {
       recipes: {
@@ -74,5 +79,14 @@
   </script>
 
   <style scoped>
-  /* Your CSS styles for the component go here */
+  /* add margin right and left to the whole page*/
+    .columns {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+
+    .tag {
+        margin-right: 0.5rem;
+    }
+
   </style>

@@ -30,6 +30,9 @@ Route::get('/', function () {
 Route::get('/recettes', [RecettesController::class, 'index']);
 Route::get('/recettes/{recipe}', [RecettesController::class, 'show']);
 
+Route::get('/tags', [TagController::class, 'index']);
+Route::get('tags/{tag}', [TagController::class, 'searchByTag']);
+
 
 Route::get('/tags', [TagController::class, 'index']);
 // routes qui appellent les fonctions du controller
