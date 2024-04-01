@@ -1,7 +1,6 @@
 <template>
     <Layout>
     <div>
-        <!-- CHANGER LE DIV.  -->
 
       <br>
       <!-- If recipes is undefined or empty -->
@@ -56,12 +55,9 @@
   </template>
 
   <script>
-//   import Link from '@inertiajs/inertia-vue3';
   import Layout from './Layout.vue';
  import { Link } from '@inertiajs/inertia-vue3';
 //  import { Link } from 'vue-router' //finalement j'utilise pas ça
-
-
 
   export default {
     name: 'Recipes.vue',

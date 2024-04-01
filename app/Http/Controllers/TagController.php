@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Recipe;
 use App\Models\Tag;
+use Inertia\Inertia;
 
 class TagController extends Controller
 {
@@ -12,7 +13,10 @@ class TagController extends Controller
     {
         // get les tags dans l'ordre alphabétique
         $tags = Tag::orderBy('name')->get();
-        return view('tags/index', compact('tags'));
+
+        return Inertia::render('Tags', [
+            'tags' => $tags
+        ]);
     }
 
     public function show($name)
@@ -27,8 +31,9 @@ class TagController extends Controller
     // Get recipes associated with the given tag
     $recipes = Tag::where('name', $tag)->firstOrFail()->recipes;
 
-    // You can also pass the tag information to the view if needed
+    // pass the tag information to the view if needed. NOT DONE
     $tagInfo = $tag;
+
 
     return view('tags/show', compact('recipes', 'tagInfo'));
     }

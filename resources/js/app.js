@@ -7,7 +7,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { InertiaProgress } from '@inertiajs/progress'; // Import InertiaProgress
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
-//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/inertia-vue3';
 
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

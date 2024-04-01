@@ -8,6 +8,9 @@ use Inertia\Inertia;
 
 class RecettesController extends Controller
 {
+    /**
+     * Afficher toutes les recettes
+     */
     function index(){
         // Get all recipes with their associated TAGS, USER, and INGREDIENTS
         $recipes = Recipe::with(['tags', 'user', 'ingredients'])->get();
@@ -19,6 +22,9 @@ class RecettesController extends Controller
         ]);
     }
 
+    /**
+     * Montrer une seule recette, en entier, avec les commentaires
+     */
     public function show($recipe_url) {
         $recipe = Recipe::where('url',$recipe_url)->first(); //get first recipe with recipe_nam == $recipe_name
         // LOAD CAPTCHA QUESTION ? $captchaQuestion = $this->generateCaptchaQuestion();
@@ -31,14 +37,22 @@ class RecettesController extends Controller
 
     }
 
+    /**
+     * Chercher des recettes par leur titre, tags ou ingredients
+     */
     public function search(Request $request) {
         $search = $request->input('recipe');
 
-        //search for recipes with the search term in the title or in the tags
+        //search for recipes with the search term in the title
         $recipes = Recipe::where('title', 'like', '%'.$search.'%')->get();
 
         //add the recipes with the search term in the tags
         $recipes = $recipes->merge(Recipe::whereHas('tags', function($q) use ($search) {
+            $q->where('name', 'like', '%'.$search.'%');
+        })->get());
+
+        //add the recipes that have the search term in the ingredients
+        $recipes = $recipes->merge(Recipe::whereHas('ingredients', function($q) use ($search) {
             $q->where('name', 'like', '%'.$search.'%');
         })->get());
 

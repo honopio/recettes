@@ -20,8 +20,15 @@
                     </a>
                     <p class="subtitle has-text-grey"><em>par {{ $recipe->user->name }}</em></p>
 
-                     {{-- display la liste des ingredients --}}
-                    <p class="subtitle has-text-grey"><strong><em>Ingredients</em></strong> : {{ $recipe->ingredients }}</p>
+                     {{-- display la liste des ingredients. juste le name --}}
+                    <p class="subtitle has-text-grey">
+                        <strong><em>Ingrédients</em></strong> :
+                        @foreach ($recipe->ingredients as $ingredient)
+                            {{ $ingredient->name }}
+                            @if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
 
                      {{-- display les 250 premiers caractères de content, puis "...". il faut clicker sur Read more pour voir la suite--}}
                     <p class= "subtitle has-text-grey">{{ substr($recipe->content, 0, 250) }}...</p>
@@ -40,7 +47,7 @@
                         @endif
                     </p>
 
-                    <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">Read More</a>
+                    <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">> Lire en entier <</a>
                 </div>
 
             @endforeach

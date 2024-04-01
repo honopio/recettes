@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Recipe;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
     function index(){
-        $recipes = Recipe::all(); //get all recipes
+    //get first 3 recipes
+    $recipes = Recipe::with(['tags', 'user', 'ingredients'])->limit(3)->get();
 
-        return view('welcome',array(
-            'recipes' => $recipes
-        ));
+    //return Welcome.vue
+    return Inertia::render('Welcome', [
+        'recipes' => $recipes
+    ]);
     }
 }

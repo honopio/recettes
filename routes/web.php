@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\RecettesController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,31 +19,25 @@ use App\Http\Controllers\TagController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-//when /recettes, call index() function from RecettesController
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+Route::get('/', [HomeController::class, 'index']);
+
+/* RECETTES */
 Route::get('/recettes', [RecettesController::class, 'index']);
+Route::get('/recettes/search', [RecettesController::class, 'search']);
 Route::get('/recettes/{recipe}', [RecettesController::class, 'show']);
 
+/* TAGS */
 Route::get('/tags', [TagController::class, 'index']);
 Route::get('tags/{tag}', [TagController::class, 'searchByTag']);
 
-
-Route::get('/tags', [TagController::class, 'index']);
-// routes qui appellent les fonctions du controller
-// Route::prefix('recettes')->group(function () {
-//     Route::get('/', [RecettesController::class, 'index']);
-//     Route::post('/', [RecettesController::class, 'store']);
-//     Route::get('/{recipe}', [RecettesController::class, 'show']);
-//     Route::put('/{recipe}', [RecettesController::class, 'update']);
-//     Route::delete('/{recipe}', [RecettesController::class, 'destroy']);
-// });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
