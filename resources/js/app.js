@@ -4,6 +4,8 @@ import 'bulma/css/bulma.min.css';
 import '@fortawesome/fontawesome-free/css/all.css'
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
+import { InertiaProgress } from '@inertiajs/progress'; // Import InertiaProgress
+
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
@@ -22,3 +24,5 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+
+InertiaProgress.init({ color: '#4B5563' }); // Initialize InertiaProgress

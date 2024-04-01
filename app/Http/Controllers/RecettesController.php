@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Recipe;
+use Inertia\Inertia;
 
 class RecettesController extends Controller
 {
     function index(){
-        // Get all recipes with their associated tags
-        $recipes = Recipe::with('tags')->get();
+        // Get all recipes with their associated TAGS, USER, and INGREDIENTS
+        $recipes = Recipe::with(['tags', 'user', 'ingredients'])->get();
 
-        //methode compact pour passer plusieurs variables à la vue
-        return view('recettes', compact('recipes'));
+        // Return Recipes.vue with all the recipes
+        //return($recipes);
+        return Inertia::render('Recipes', [
+            'recipes' => $recipes
+        ]);
     }
 
     public function show($recipe_url) {
