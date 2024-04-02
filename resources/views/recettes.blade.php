@@ -53,7 +53,7 @@
             </p>
 
             {{-- href to the recipe url : /recettes/url. lein rendu gris au lieu de bleu --}}
-            <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">> Lire en entier <</a>
+            <a class="has-text-grey-dark" href="{{ url('recettes/' . $recipe->url) }}">Read More</a>
             </div>
 
         @endforeach

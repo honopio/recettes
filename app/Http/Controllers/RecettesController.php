@@ -43,21 +43,38 @@ class RecettesController extends Controller
     public function search(Request $request) {
         $search = $request->input('recipe');
 
-        //search for recipes with the search term in the title
-        $recipes = Recipe::where('title', 'like', '%'.$search.'%')->get();
+        /* si c'est une requete faite aec la search bar,
+        on montre les recettes qui contiennent la recherche dans le titre, les tags ou les ingredients */
+        if ($search) {
 
-        //add the recipes with the search term in the tags
-        $recipes = $recipes->merge(Recipe::whereHas('tags', function($q) use ($search) {
-            $q->where('name', 'like', '%'.$search.'%');
-        })->get());
+            //search for recipes with the search term in the title
+            $recipes = Recipe::where('title', 'like', '%'.$search.'%')->get();
 
-        //add the recipes that have the search term in the ingredients
-        $recipes = $recipes->merge(Recipe::whereHas('ingredients', function($q) use ($search) {
-            $q->where('name', 'like', '%'.$search.'%');
-        })->get());
+            //add the recipes with the search term in the tags
+            $recipes = $recipes->merge(Recipe::whereHas('tags', function($q) use ($search) {
+                $q->where('name', 'like', '%'.$search.'%');
+            })->get());
+
+            //add the recipes that have the search term in the ingredients
+            $recipes = $recipes->merge(Recipe::whereHas('ingredients', function($q) use ($search) {
+                $q->where('name', 'like', '%'.$search.'%');
+            })->get());
+
+        } else {
+            //on retourne les recettes qui ont un ingrédient en particulier
+            $ingredient = $request->input('ingredient');
+            $recipes = Recipe::whereHas('ingredients', function($q) use ($ingredient) {
+                $q->where('name', $ingredient);
+            })->get();
+        }
 
        //return the recettes view with the recipes
-         return view('recettes', compact('recipes'));
+        return view('recettes', compact('recipes'));
+
+        //NE MARCHE PAS POUR LISNTANT
+        return Inertia::render('Recipes', [
+            'recipes' => $recipes
+        ]);
     }
 }
 ?>

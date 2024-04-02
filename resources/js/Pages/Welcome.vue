@@ -27,7 +27,8 @@
 
             <!-- Display the list of ingredients -->
             <span class="subtitle has-text-grey"><strong><em>Ingredients</em></strong> : </span>
-            <span class="subtitle has-text-grey" v-for="(ingredient, key) in recipe.ingredients" :key="key">{{ ingredient.name }}
+            <span class="subtitle has-text-grey" v-for="(ingredient, key) in recipe.ingredients" :key="key">
+                <Link class="has-text-grey-dark" :href="`/recettes/search?recipe=${ingredient.name}`">{{ ingredient.name }}</Link>
                 <!-- Add a comma between ingredients (after every ingredient, except for the last one)-->
                 <span v-if="key < recipe.ingredients.length - 1" class="subtitle has-text-grey">, </span>
             </span>
