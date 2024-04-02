@@ -72,10 +72,6 @@
         required: true
       }
     },
-    mounted() {
-    // Debugging the recipes prop
-    console.log(this.recipes);
-}
   }
   </script>
 

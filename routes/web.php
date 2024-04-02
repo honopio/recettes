@@ -8,6 +8,7 @@ use App\Http\Controllers\RecettesController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,10 @@ Route::get('tags/{tag}', [TagController::class, 'searchByTag']);
 Route::get('/admin/recettes', [AdminController::class, 'index']);
 Route::get('/admin/recettes/create', [AdminController::class, 'create']);
 Route::post('/admin/recettes/edit', [AdminController::class, 'store']);
+
+/* CONTACT */
+Route::get('/contact', [ContactController::class, 'index']);
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

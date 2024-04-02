@@ -61,7 +61,7 @@ class RecettesController extends Controller
             })->get());
 
         } else {
-            //on retourne les recettes qui ont un ingrédient en particulier
+            //on retourne les recettes qui ont un ingrédient en particulier dans les ingredients ou dans le titre
             $ingredient = $request->input('ingredient');
             $recipes = Recipe::whereHas('ingredients', function($q) use ($ingredient) {
                 $q->where('name', $ingredient);
@@ -69,7 +69,7 @@ class RecettesController extends Controller
         }
 
        //return the recettes view with the recipes
-        return view('recettes', compact('recipes'));
+        //return view('recettes', compact('recipes'));
 
         //NE MARCHE PAS POUR LISNTANT
         return Inertia::render('Recipes', [
