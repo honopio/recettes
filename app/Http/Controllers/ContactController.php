@@ -16,17 +16,17 @@ class ContactController extends Controller
     }
 
 
-    function store(Request $request) { //store the contact form data
-    //     $contact = new Contact();
-    //   //  $contact->nom = request('nom');
-    //     $contact->email = request('email');
-    //     $contact->message = request('message');
-    //     $contact->save();
-    //    return Inertia::render('Contact')->with('success', 'Message envoyé avec succès!'); //return the contact form with a success message
-        Contact::create($request->validate([
-            'email' => 'required|email',
-            'message' => 'required',
-        ]));
-        return Inertia::render('Contact')->with('success', 'Message envoyé avec succès!'); //return the contact form with a success message
+function store(Request $request) {
+    $validatedData = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required',
+    ]);
+
+    // Create a new Contact record with the validated data
+    Contact::create($validatedData);
+
+    // Return a response indicating success
+    return Inertia::render('Contact')->with('success', 'Message envoyé avec succès!');
 }
 }

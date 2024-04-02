@@ -1,5 +1,5 @@
 <template>
-    <Layout>
+    <Layout title="Formulaire de contact">
       <div class="tout">
         <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Contact</h1>
         <br>
@@ -44,8 +44,10 @@
 
       const router = useRouter();
 
+      //console.log('formData:', formData.value) //trace
       const submitForm = async () => {
         try {
+
           await axios.post(route('contact.store'), formData.value);
           formData.value.name = '';
           formData.value.email = '';
@@ -68,8 +70,7 @@
   <style scoped>
   /* margin right and left to the whole page */
   .tout {
-      margin-right: 1rem;
-      margin-left: 1rem;
+      margin: 0 5%;
   }
 
   .subtitle {

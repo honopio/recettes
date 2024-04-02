@@ -34,6 +34,10 @@ class RecettesController extends Controller
 
         //methode compact pour passer plusieurs variables à la vue
         return view('recipes/single', compact('recipe', 'tags'));
+        // return Inertia::render('SingleRecipe', [
+        //     'recipe' => $recipe,
+        //     'tags' => $tags
+        // ]);
 
     }
 
