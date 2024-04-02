@@ -1,0 +1,71 @@
+Générer des données :
+- code (qui utilise la factory) dans DatabaseSeeder. pas besoin de créer d'autres seeders pour ce projet.
+- php artisan db:seed
+
+
+
+GESTION DES TAGS :
+j'ai créé 2 migrations :
+- une pour créer la table tag dans la db
+- une pour créer la table recipe_tag dans la db (table de jointure, pcq un tag peut avoir plsrs recettes, et une recette pt avoir plsrs tags)
+
+J'ai ajouté dans DatabaseSeeder.php du code pour remplir de fausses données les tables tag et recipe_tag
+
+j'ai créé un model tag, pour définir la relation many to many avec le model recipe (function belongsToMany)
+dans le model recipe, j'ai ajouté la relation many to many avec le model tag
+
+Pas besoin de nouveau model recipe_tag, pcq Laravel comprend que c'est une table de jointure.
+La definition des relations dans tag et dans recipe suffit.
+
+Grâce à ça, dans le seeder, on peut juste écrire ça, sans appeler un model specifique à la table recipe_tag, comme on le fait pr les autres tables
+//fetch toutes les recettes et leur attache entre 0 et 4 tags
+        \App\Models\Recipe::all()->each(function ($recipe) {
+            $tags = Tag::inRandomOrder()->limit(3)->get();
+            $recipe->tags()->attach($tags);
+        });
+
+
+IL FAUT :
+-modifier le formulaire GET du layout main.blade/php. pour l'instant pas d'action
+-> on peut accéder aux recettes d'un tag avec /tag/name mais pas en cherchant dans la barre
+
+composer require inertiajs/inertia-laravel
+composer require laravel/breeze --dev
+php artisan breeze:install
+-> choisir vue
+
+installer node.js
+
+php artisan migrate
+(necessaire?) npm install
+npm run dev
+
+http://localhost:5173/
+
+(pas necessaire pour le prof) npm install bulma
+(pas necessaire pour le prof) npm install @fortawesome/fontawesome-free
+
+vue : single page application. une seule page chargée au début (meme si on change d'url)
+ le serveur renvoie pas un html complet mais une struture de données (un json ici)
+le client remet en forme la vue. + rapide et - de travail pr le serveur
+
+npm install vue-router
+npm install @inertiajs/inertia-vue3
+npm install @inertiajs/progress
+
+CE QUON A FAIT :
+La barre de recherche permet de chercher les recettes qui contiennent
+le mot recherché, qu'il soit dans les tags, dans le titre ou dans les ingrédients.
+voir fonction search() dans RecettesController
+Clicker sur un tag (depuis n'importe quelle page) affiche toutes les recettes qui contiennent ce tag
+L'application a été réécrite avec inertia et vue.js
+
+les ingredients sont clickables
+
+je n'arrive pas à renvoyer la vue Recipes.vue dans le recipecontroller pour la fonction search()
+
+dans app.js : //  .component('Link', Link);
+pas necessaire?
+
+POUR LINSTANT STORE() DANS CONTACTCONTROLLER MARCHE AVEC LA VUE BLADE.
+FAIRE LE FORMULAIRE AVEC INERTIA

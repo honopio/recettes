@@ -12,7 +12,7 @@ class ContactController extends Controller
       //  return view('contact');
 
       //return Contact.vue
-        return Inertia::render('Contact');
+     return Inertia::render('Contact');
     }
 
 
