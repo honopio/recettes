@@ -9,6 +9,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +22,14 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
 Route::get('/', [HomeController::class, 'index']);
 
 /* RECETTES */
+//inertia route doesn't work either ???
+// Route::get('/recettes', function () {
+//     return Inertia::render('Recettes');
+// });
+
 Route::get('/recettes', [RecettesController::class, 'index']);
 Route::get('/recettes/search', [RecettesController::class, 'search']);
 Route::get('/recettes/{recipe}', [RecettesController::class, 'show']);
@@ -48,6 +46,9 @@ Route::post('/admin/recettes/edit', [AdminController::class, 'store']);
 /* CONTACT */
 Route::get('/contact', [ContactController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+/* COMMENT */
+Route::post('/comment', [CommentController::class, 'store']); //route pour le formulaire de commentaire
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

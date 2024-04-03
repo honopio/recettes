@@ -26,18 +26,15 @@ class RecettesController extends Controller
      * Montrer une seule recette, en entier, avec les commentaires
      */
     public function show($recipe_url) {
-        $recipe = Recipe::where('url',$recipe_url)->first(); //get first recipe with recipe_nam == $recipe_name
-        // LOAD CAPTCHA QUESTION ? $captchaQuestion = $this->generateCaptchaQuestion();
+        //get recipe with tags, user, ingredients, where url = $recipe_url
+        $recipe = Recipe::with(['tags', 'user', 'ingredients', 'comments.user'])->where('url', $recipe_url)->first();
 
         // Fetch tags associated with the recipe
-        $tags = $recipe->tags()->pluck('name');
+        // $tags = $recipe->tags()->pluck('name');
 
-        //methode compact pour passer plusieurs variables à la vue
-        return view('recipes/single', compact('recipe', 'tags'));
-        // return Inertia::render('SingleRecipe', [
-        //     'recipe' => $recipe,
-        //     'tags' => $tags
-        // ]);
+        return Inertia::render('Single', [
+            'recipe' => $recipe
+        ]);
 
     }
 
@@ -51,26 +48,29 @@ class RecettesController extends Controller
         on montre les recettes qui contiennent la recherche dans le titre, les tags ou les ingredients */
         if ($search) {
 
-            //search for recipes with the search term in the title
-            $recipes = Recipe::where('title', 'like', '%'.$search.'%')->get();
+            //search for recipes with the search term in the title. with tags, user, ingredients, and comments
+            $recipes = Recipe::with(['tags', 'user', 'ingredients'])
+            ->where('title', 'like', '%'.$search.'%')
+            ->get();
 
             //add the recipes with the search term in the tags
             $recipes = $recipes->merge(Recipe::whereHas('tags', function($q) use ($search) {
                 $q->where('name', 'like', '%'.$search.'%');
-            })->get());
+            })->with(['user', 'tags', 'ingredients'])->get());
 
             //add the recipes that have the search term in the ingredients
             $recipes = $recipes->merge(Recipe::whereHas('ingredients', function($q) use ($search) {
                 $q->where('name', 'like', '%'.$search.'%');
-            })->get());
+            })->with(['user', 'tags', 'ingredients'])->get());
 
         } else {
             //on retourne les recettes qui ont un ingrédient en particulier dans les ingredients ou dans le titre
             $ingredient = $request->input('ingredient');
             $recipes = Recipe::whereHas('ingredients', function($q) use ($ingredient) {
                 $q->where('name', $ingredient);
-            })->get();
+            })->with(['user', 'tags', 'ingredients'])->get();
         }
+
 
        //return the recettes view with the recipes
         //return view('recettes', compact('recipes'));

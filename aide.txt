@@ -67,5 +67,12 @@ je n'arrive pas à renvoyer la vue Recipes.vue dans le recipecontroller pour la 
 dans app.js : //  .component('Link', Link);
 pas necessaire?
 
-POUR LINSTANT STORE() DANS CONTACTCONTROLLER MARCHE AVEC LA VUE BLADE.
-FAIRE LE FORMULAIRE AVEC INERTIA
+
+
+PROBLEME : FAIRE LE FORMULAIRE DE CONTACT AVEC INERTIA
+
+PROBLEME : <Link> component works fine when the route renders a blade file, but not when it renders a Vue component.
+see : Layout.vue navbar for links that should render a Vue file.
+see working links : Welcome.vue
+
+ISSUE IN CONTROLLERS

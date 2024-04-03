@@ -36,14 +36,15 @@
 
             <!-- Display the tags -->
             <p class="subtitle has-text-grey">
-              <strong><em>Tags</em></strong> :
-              <span v-if="recipe.tags.length === 0"><em>pas de tags</em></span>
-              <template v-else>
-                <!-- avec ':' pcq c un attribut dynamique. sans quand c un attribut statique. c un shortcut pour v-bind:href-->
+            <strong><em>Tags</em></strong> :
+            <!-- If there are no tags, say "pas de tags" -->
+            <span v-if="!recipe.tags || recipe.tags.length === 0">pas de tags</span>
+            <!-- If there are tags, display them -->
+            <template v-else>
                 <span v-for="tag in recipe.tags" :key="tag.id">
                     <Link :href="`/tags/${tag.name}`" class="tag">{{ tag.name }}</Link>
                 </span>
-              </template>
+            </template>
             </p>
 
             <!-- Link to the recipe URL -->

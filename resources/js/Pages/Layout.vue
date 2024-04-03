@@ -1,3 +1,17 @@
+<script>
+import { Link } from '@inertiajs/inertia-vue3';
+
+export default {
+    name: "Layout",
+    components: {
+        Link,
+    },
+    props: {
+        title: String, // Define title prop to receive page title
+        component: Object // Define component prop to receive Inertia component
+    },
+}
+</script>
 <template>
     <div>
         <nav class="navbar py-4">
@@ -16,11 +30,15 @@
                 </div>
                 <div class="navbar-menu">
                     <div class="navbar-start">
-                        <Link class="navbar-item" href="/">Home</Link>
+                        <!-- make it go to root -->
+                        <Link class="navbar-item" href="/">Accueil</Link>
                         <Link class="navbar-item" href="/recettes">Recettes</Link>
                         <Link class="navbar-item" href="/contact">Contact</Link>
-                        <Link class="navbar-item" href="/tags">Tags</Link>
                         <Link class="navbar-item" href="/phpliteadmin.php">DBADMIN</Link>
+                        <Link class="navbar-item" href="/tags">Tags</Link>
+                        <Link class="navbar-item" href="/admin/recettes">Admin</Link>
+                        <!-- TRACE. marche si url est routée vers une fonction d'un controlleur qui renvoie un blade -->
+                        <Link class="navbar-item" href="/recettes/Boeuf-Bourguignons-438">lienBlade</Link>
                     </div>
                     <div class="navbar-item">
                         <!-- Search form -->
@@ -36,7 +54,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -56,25 +73,3 @@
     </div>
     <slot></slot>
 </template>
-
-<script>
-import { Link } from '@inertiajs/inertia-vue3';
-
-export default {
-    name: "Layout",
-    components: {
-        Link,
-    },
-    props: {
-        title: String, // Define title prop to receive page title
-        component: Object // Define component prop to receive Inertia component
-    },
-
-
-
-}
-</script>
-
-<style scoped>
-/* Your CSS styles for the layout go here */
-</style>

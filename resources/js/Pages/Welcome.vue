@@ -11,6 +11,9 @@
       <!-- Display recipes if available -->
       <template v-else>
         <h1 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">Les 3 dernières recettes : </h1>
+
+        <!-- TRACE -->
+        <!-- <Link><h1 href="/recettes">Voir toutes les recettes</h1></Link> -->
         <br><br>
         <div class="columns is-multiline">
 
