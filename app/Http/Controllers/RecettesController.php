@@ -71,11 +71,6 @@ class RecettesController extends Controller
             })->with(['user', 'tags', 'ingredients'])->get();
         }
 
-
-       //return the recettes view with the recipes
-        //return view('recettes', compact('recipes'));
-
-        //NE MARCHE PAS POUR LISNTANT
         return Inertia::render('Recipes', [
             'recipes' => $recipes
         ]);

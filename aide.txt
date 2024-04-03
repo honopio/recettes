@@ -75,4 +75,14 @@ PROBLEME : <Link> component works fine when the route renders a blade file, but 
 see : Layout.vue navbar for links that should render a Vue file.
 see working links : Welcome.vue
 
-ISSUE IN CONTROLLERS
+TODO :
+Make the ingredients display as their name in AdminEditRecette.vue (instead of the whole array, i.e. [object, object])
+see edit() in AdminController
+
+faire le formulaire en post pour le contact et pour l'edition d'une recette
+
+GUIDE DINSTALLATION :
+
+npm install
+(dans composer.json il y a les dpdces php, et dans package.json il y a les dpdces inertia)
+

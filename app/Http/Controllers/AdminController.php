@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Models\Recipe;
+use Inertia\Inertia;
 
 class AdminController extends Controller
 {
@@ -13,11 +14,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        // display a list of all recipes title and userid
-        $recipes = Recipe::all(); //get all recipes
-        return view('admin/recettes',array(
+        // display a list of all recipes title and userid in admin list
+        $recipes = Recipe::all();
+
+      //  dd($recipes->toArray());
+
+        //return AdminRecettes.vue
+        return Inertia::render('AdminRecettes', [
             'recipes' => $recipes
-        ));
+        ]);
 
     }
 
@@ -27,7 +32,10 @@ class AdminController extends Controller
     public function create()
     {
         // get to a create a new recipe page
-        return view('admin/create');
+       // return view('admin/create');
+
+       //return AdminRecettes.vue
+         return Inertia::render('AdminRecettes');
 
     }
 
@@ -71,11 +79,18 @@ class AdminController extends Controller
      */
     public function edit(string $id)
     {
-        // get to a a new page to edit the recipe
-        $recipe = Recipe::find($id);
-        return view('admin/edit',array(
-            'recipe' => $recipe
-        ));
+        // Get the recipe and its associated ingredients
+        // $recipe = Recipe::with('ingredients:name')->find($id);
+        $recipe = Recipe::with(['tags', 'ingredients'])->where('id', $id)->first();
+
+        // Extract ingredient names and convert them to a comma-separated string
+        // $ingredientNames = $recipe->ingredients->pluck('name')->implode(', ');
+
+        // Pass the recipe and ingredient names to the view
+        return Inertia::render('AdminEditRecette', [
+            'recipe' => $recipe,
+            // 'ingredientNames' => $ingredientNames,
+        ]);
     }
 
     /**
@@ -98,7 +113,7 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //delete $id recipe
-        $recipe = Recipe::find($id);
+        $recipe = Recipe::findOrFail($id);
         $recipe->delete();
         return redirect('/admin/recettes')->with('success', 'Vous avez supprimé une recette avec succès');
 

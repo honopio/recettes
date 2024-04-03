@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('recipes', function (Blueprint $table) {
-            $table->id();
+            $table->id()->onDelete('cascade');
 
-            //foreign key to reference id in users table
-            $table->foreignId('user_id')->constrained()->onDelete('set null');
+            //foreign key to reference id in users table. nullable
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->mediumText('title');
             $table->longText('content');
             //price of the recipe

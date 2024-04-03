@@ -58,8 +58,7 @@
 
   <script>
   import Layout from './Layout.vue';
- import { Link } from '@inertiajs/inertia-vue3';
-//  import { Link } from 'vue-router' //finalement j'utilise pas ça
+  import { Link } from '@inertiajs/inertia-vue3';
 
   export default {
     name: 'Recipes.vue',

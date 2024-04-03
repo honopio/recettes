@@ -37,8 +37,7 @@ export default {
                         <Link class="navbar-item" href="/phpliteadmin.php">DBADMIN</Link>
                         <Link class="navbar-item" href="/tags">Tags</Link>
                         <Link class="navbar-item" href="/admin/recettes">Admin</Link>
-                        <!-- TRACE. marche si url est routée vers une fonction d'un controlleur qui renvoie un blade -->
-                        <Link class="navbar-item" href="/recettes/Boeuf-Bourguignons-438">lienBlade</Link>
+
                     </div>
                     <div class="navbar-item">
                         <!-- Search form -->

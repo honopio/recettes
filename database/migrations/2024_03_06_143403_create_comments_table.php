@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
-            //foreign key to reference id in users table
-            $table->foreignId('user_id')->constrained();
-
-            //foreign key to reference id in recipes table
-            $table->foreignId('recipe_id')->constrained();
+            //foreign key to reference id in users table. user_id is nullable
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            //foreign key to reference id in recipes table. if recipe is deleted, comments are deleted too
+            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
 
             $table->longText('content');
             $table->timestamps();
