@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Models\Recipe;
 use Inertia\Inertia;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
+
 
 class AdminController extends Controller
 {
@@ -62,8 +65,8 @@ class AdminController extends Controller
         $recipe->price = $request->input('price');
         $recipe->url = $request->input('title');
         $recipe->save();
-        return redirect('/admin/recettes')->with('success', 'Vous avez ajouté une recette avec succès');
-
+        //return redirect('/admin/recettes')->with('success', 'Vous avez ajouté une recette avec succès');
+        return redirect()->route('admin.recettes.index')->with('success', 'Vous avez ajouté une recette avec succès');
     }
 
     /**
@@ -75,7 +78,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Montre un formulaire pour editer une recette
      */
     public function edit(string $id)
     {
@@ -94,19 +97,30 @@ class AdminController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour la recette dans la base de données
      */
     public function update(Request $request, string $id)
     {
-        //update the recipe
+
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'price' => 'numeric|min:0'
+            //il faut gérer les ingrédients. voir AdminEditRecette.vue
+        ]);
+
+        // Validation passed, update the recipe
         $recipe = Recipe::find($id);
-           $recipe->title = $request->input('title');
-           $recipe->content = $request->input('content');
-           $recipe->ingredients = $request->input('ingredients');
-           $recipe->price = $request->input('price');
-           $recipe->save();
+        $recipe->title = $validatedData['title'];
+        $recipe->content = $validatedData['content'];
+        $recipe->price = $validatedData['price'];
+        $recipe->save();
+
         return redirect('/admin/recettes')->with('success', 'Vous avez modifié la recette avec succès');
+
     }
+
+
     /**
      * Remove the specified resource from storage.
      */

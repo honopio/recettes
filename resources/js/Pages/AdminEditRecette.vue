@@ -3,7 +3,8 @@
     <div class="container">
         <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Modifier la Recette</h1>
 
-        <form @submit="submitForm">
+        <!-- prevent pour éviter le page reload et soumettre le form avec JS-->
+        <form @submit.prevent="submitForm">
             <div class="form-group">
                 <label for="title" class="subtitle has-text-grey">Titre</label>
                 <input v-model="recipe.title" type="text" name="title" id="title" class="form-control" required>
@@ -18,8 +19,10 @@
 
             <div class="form-group">
                 <label for="ingredients" class="subtitle has-text-grey">Ingrédients</label>
-                <!-- textarea that displays the names of the ingredients of the recipe -->
-                <textarea v-model="recipe.ingredients" name="ingredients" id="ingredients" class="form-control message-textarea" required rows="5"></textarea>
+                <!-- textarea that displays the names of the ingredients of the recipe.
+                now that we've implemented a ingredients table, we need to change the form
+            -->
+                <!-- <textarea v-model="recipe.ingredients" name="ingredients" id="ingredients" class="form-control message-textarea" required rows="5"></textarea> -->
             </div>
             <br>
 
@@ -42,7 +45,7 @@ import { Link } from '@inertiajs/inertia-vue3';
 export default {
     data() {
         return {
-            recipe: {
+            recipeData: {
                 title: '',
                 content: '',
                 ingredients: '',
@@ -52,7 +55,8 @@ export default {
     },
     methods: {
         submitForm() {
-            // Handle form submission logic here
+            // modifie la recette. soumission du formulaire
+            this.$inertia.post(`/admin/recettes/edit/${this.recipe.id}`, this.recipe)
         }
     },
     components: {
@@ -61,7 +65,7 @@ export default {
     },
     props: {
         recipe: {
-            type: Array,
+            type: Object,
             required: true
         },
 

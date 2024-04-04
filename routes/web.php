@@ -40,9 +40,9 @@ Route::get('tags/{tag}', [TagController::class, 'searchByTag']);
 
 /* ADMIN */
 Route::get('/admin/recettes/edit/{id}', [AdminController::class, 'edit']);
-Route::get('/admin/recettes', [AdminController::class, 'index']);
+Route::get('/admin/recettes', [AdminController::class, 'index'])->name('admin.recettes.index');
 Route::get('/admin/recettes/create', [AdminController::class, 'create']);
-Route::post('/admin/recettes/edit', [AdminController::class, 'store']);
+Route::post('/admin/recettes/edit/{id}', [AdminController::class, 'update']);
 Route::delete('/admin/recettes/{id}', [AdminController::class, 'destroy'])->name('recettes.destroy');
 
 

@@ -62,7 +62,7 @@ import { Link } from '@inertiajs/inertia-vue3';
 export default {
     data() {
         return {
-            success: null,
+            success: '',
             recipes: [],
         };
     },
