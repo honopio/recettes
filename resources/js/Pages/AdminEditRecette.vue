@@ -39,7 +39,7 @@
             </div>
             <br>
 
-            <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Submit</button>
+            <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Enregistrer</button>
         </form>
                 <!-- add a "retour" button that goes back to /admin/recettes -->
                 <br>

@@ -45,18 +45,22 @@ export default {
             newRecipeData: {
             title: '',
             content: '',
-            ingredients: '',
             price: null
             }
         };
     },
     methods: {
         async createRecipe() {
-            await this.$inertia.post(route('recettes.store'), this.newRecipeData);
-            console.log('Response from server:', response);
-
-            this.success = `Vous avez créé la recette ${this.title} avec succès !`;
-            console.log('Success:', this.success);
+            try {
+                await this.$inertia.post(route('recettes.store'), {
+                    title: this.title,
+                    content: this.content,
+                    price: this.price
+                });
+                this.success = `Vous avez créé la recette ${this.title} avec succès !`;
+            } catch (error) {
+                console.error('Error creating recipe:', error);
+            }
         }
     },
     components: {
