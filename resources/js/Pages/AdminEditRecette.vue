@@ -1,6 +1,13 @@
 <template>
-    <Layout>
+
+    <Layout :title="'Admin : modification de recette'">
     <div class="container">
+        <!-- display success -->
+        <div v-if="success" class="alert alert-success">
+            <p style="color: green; font-style: italic; font-size: 18px;">{{ success }}</p>
+        </div>
+        <br>
+
         <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Modifier la Recette</h1>
 
         <!-- prevent pour éviter le page reload et soumettre le form avec JS-->
@@ -34,6 +41,10 @@
 
             <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Submit</button>
         </form>
+                <!-- add a "retour" button that goes back to /admin/recettes -->
+                <br>
+        <button @click="$inertia.visit('/admin/recettes')" class="btn btn-primary subtitle has-text-grey rounded">Retour</button>
+        <br>
     </div>
     </Layout>
 </template>
@@ -45,6 +56,7 @@ import { Link } from '@inertiajs/inertia-vue3';
 export default {
     data() {
         return {
+            success: null,
             recipeData: {
                 title: '',
                 content: '',
@@ -57,6 +69,7 @@ export default {
         submitForm() {
             // modifie la recette. soumission du formulaire
             this.$inertia.post(`/admin/recettes/edit/${this.recipe.id}`, this.recipe)
+            this.success = `Vous avez modifié la recette ${this.recipe.title} avec succès !`;
         }
     },
     components: {
@@ -84,5 +97,16 @@ export default {
 
 .message-textarea {
     width: 80%;
+}
+
+
+/* style for buttons. with a border */
+.btn {
+    border: 1px solid #000;
+    padding: 10px 20px;
+    text-align: center;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 16px;
 }
 </style>

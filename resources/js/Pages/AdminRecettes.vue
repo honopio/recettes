@@ -10,7 +10,7 @@
 </style>
 
 <template>
-    <Layout>
+    <Layout :title="'Administrateur : liste des recettes'">
     <div>
         <div v-if="success" class="alert alert-success">
             <p style="color: green; font-style: italic; font-size: 18px;">{{ success }}</p>
@@ -20,8 +20,9 @@
         <div class="container">
             <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Liste des Recettes</h1>
 
-            <br><a :href="createRoute" class="btn btn-success btn-lg ">Ajouter une recette</a><br><br>
-
+            <!-- href to this route : Route::get('/admin/recettes/create', [AdminController::class, 'create']); -->
+            <Link :href="`/admin/recettes/create`">Ajouter une recette</Link>
+            <br><br>
             <table class="table">
                 <thead>
                     <tr>
@@ -62,7 +63,7 @@ import { Link } from '@inertiajs/inertia-vue3';
 export default {
     data() {
         return {
-            success: '',
+            success: null,
             recipes: [],
         };
     },

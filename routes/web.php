@@ -39,9 +39,10 @@ Route::get('/tags', [TagController::class, 'index']);
 Route::get('tags/{tag}', [TagController::class, 'searchByTag']);
 
 /* ADMIN */
-Route::get('/admin/recettes/edit/{id}', [AdminController::class, 'edit']);
-Route::get('/admin/recettes', [AdminController::class, 'index'])->name('admin.recettes.index');
+Route::get('/admin/recettes/edit/{id}', [AdminController::class, 'edit'])->name('recettes.edit');
 Route::get('/admin/recettes/create', [AdminController::class, 'create']);
+Route::post('/admin/recettes/create', [AdminController::class, 'store'])->name('recettes.store');
+Route::get('/admin/recettes', [AdminController::class, 'index'])->name('admin.recettes.index');
 Route::post('/admin/recettes/edit/{id}', [AdminController::class, 'update']);
 Route::delete('/admin/recettes/{id}', [AdminController::class, 'destroy'])->name('recettes.destroy');
 

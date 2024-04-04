@@ -38,35 +38,35 @@ class AdminController extends Controller
        // return view('admin/create');
 
        //return AdminRecettes.vue
-         return Inertia::render('AdminRecettes');
+         return Inertia::render('AdminCreateRecette');
 
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created recipe in storage.
      */
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'ingredients' => 'required',
+            // 'ingredients' => 'required',
             //price is a number, is min 0, and is not required
             'price' => 'numeric|min:0'
         ]);
 
         //store the recipe
         $recipe = new Recipe;
-        //QUEL USER ID METTRE?
+//USER ID CODE EN DUR
         $recipe->user_id = 1;
         $recipe->title = $request->input('title');
         $recipe->content = $request->input('content');
-        $recipe->ingredients = $request->input('ingredients');
         $recipe->price = $request->input('price');
         $recipe->url = $request->input('title');
         $recipe->save();
-        //return redirect('/admin/recettes')->with('success', 'Vous avez ajouté une recette avec succès');
-        return redirect()->route('admin.recettes.index')->with('success', 'Vous avez ajouté une recette avec succès');
+
+        //return the same vue with success message
+        return redirect()->route('admin.recettes.index');
     }
 
     /**
@@ -83,7 +83,6 @@ class AdminController extends Controller
     public function edit(string $id)
     {
         // Get the recipe and its associated ingredients
-        // $recipe = Recipe::with('ingredients:name')->find($id);
         $recipe = Recipe::with(['tags', 'ingredients'])->where('id', $id)->first();
 
         // Extract ingredient names and convert them to a comma-separated string
@@ -116,8 +115,8 @@ class AdminController extends Controller
         $recipe->price = $validatedData['price'];
         $recipe->save();
 
-        return redirect('/admin/recettes')->with('success', 'Vous avez modifié la recette avec succès');
-
+        //return the same vue with success message
+        return redirect()->back();
     }
 
 
@@ -129,7 +128,7 @@ class AdminController extends Controller
         //delete $id recipe
         $recipe = Recipe::findOrFail($id);
         $recipe->delete();
-        return redirect('/admin/recettes')->with('success', 'Vous avez supprimé une recette avec succès');
+        return redirect('/admin/recettes');
 
     }
 }
