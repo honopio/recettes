@@ -49,12 +49,12 @@
                 </h2>
 
                 <div class="formulaire">
-                    <form action="comment" method="post">
+                    <form @submit.prevent="createComment">
                         <input type="hidden" name="recipe_id" :value="recipe.id">
                         <div class="field">
                             <div class="control">
                                 <label class="subtitle">Ajoutez un commentaire</label><br>
-                                <textarea class="textarea" name="content" placeholder="Ecrivez votre commentaire"></textarea>
+                                <textarea v-model="content" class="textarea" name="content" placeholder="Ecrivez votre commentaire"></textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn subtitle has-text-grey border-radius=5px">Envoyer</button>
@@ -66,6 +66,7 @@
                 </div>
                 <br>
 
+                <!-- authentification pas implementee sur cette branche -->
                 <div v-if="!isLoggedIn" class="subtitle has-text-grey">
                     <em>Connectez-vous pour ajouter un commentaire</em>
                 </div>
@@ -86,6 +87,30 @@ import Layout from './Layout.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
+    data() {
+        return {
+            success: null,
+            isLoggedIn: false,
+            content: '',
+
+        };
+    },
+    methods: {
+        async createComment() {
+            try {
+                const response = await this.$inertia.post(route('comments.store', { recipe: this.recipe.id }), {
+                    content: this.content,
+                    recipe_id: this.recipe.id,
+                });
+
+                // Reset the content field and show success message
+                this.content = '';
+                this.success = `Vous avez ajouté un commentaire avec succès !`;
+            } catch (error) {
+                console.error('Error creating comment:', error);
+            }
+        },
+    },
     components: {
         Link,
         Layout,

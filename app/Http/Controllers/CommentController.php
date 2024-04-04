@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Inertia\Inertia;
 
+/**
+ *  comments are displayed and created in the view of the recipe they belong to : recipes/single.blade.php
+ */
 class CommentController extends Controller
 {
-    //implement crud. comments are displayed in the view of the recipe they belong to : recipes/single.blade.php
-    //comments are created in the view of the recipe they belong to : recipes/single.blade.php
 
-    //function to display all comments
+    /**
+     * display all comments
+     */
     function index(){
         $comments = Comment::all(); //get all comments
 
@@ -19,15 +23,22 @@ class CommentController extends Controller
         ));
     }
 
-    //function to create a comment
-    function store() {
+    /**
+     * stores a new comment in the db
+     */
+    function store(Request $request){
+        $request->validate([
+            'content' => 'required',
+            'recipe_id' => 'required'
+        ]);
+
         $comment = new Comment();
-        $comment->content = request('content');
-        $comment->recipe_id = request('recipe_id');
+        $comment->content = $request->input('content');
+        $comment->recipe_id = $request->input('recipe_id');
         $comment->user_id = 1; //hardcoded for now. --------------------- NEEDS TO BE EDITED -------------------------------------
         $comment->save();
 
-        return back()->with('success', 'Votre commentaire a bien été ajouté.');
+        return back();
     }
 
 

@@ -30,9 +30,10 @@ Route::get('/', [HomeController::class, 'index']);
 //     return Inertia::render('Recettes');
 // });
 
-Route::get('/recettes', [RecettesController::class, 'index']);
+Route::get('/recettes', [RecettesController::class, 'index'])->name('recettes');
 Route::get('/recettes/search', [RecettesController::class, 'search']);
-Route::get('/recettes/{recipe}', [RecettesController::class, 'show']);
+Route::get('/recettes/{recipe}', [RecettesController::class, 'show'])->name('recettes.show');
+Route::post('/recettes/{recipe}', [CommentController::class, 'store'])->name('comments.store');
 
 /* TAGS */
 Route::get('/tags', [TagController::class, 'index']);
