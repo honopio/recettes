@@ -40,9 +40,6 @@
                             <!-- link that goes to admin/recettes/edit/{{the id of the recipe}}, with <Link> -->
                             <Link :href="`/admin/recettes/edit/${recette.id}`">Modifier</Link>
 
-                            <!-- je n'arrive pas à utiliser la route helper function de vuejs -->
-                            <!-- <a :href="editRoute(recette.id)">Modifier</a> -->
-
                         </td>
                         <td>
                             <Link href="#" @click="deleteRecipe(recette.id)">Supprimer</Link>

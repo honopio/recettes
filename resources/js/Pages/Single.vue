@@ -8,9 +8,9 @@
             <div class="column is-offset-1 is-10">
                 <span><small class="has-text-grey-dark">{{ recipe.updated_at }}</small></span>
 
-                <a class="has-text-grey-dark" :href="`/recettes/${recipe.url}`">
+                <Link :href="`/recettes/${recipe.url}`" class="has-text-grey-dark">
                     <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ recipe.title }}</h2>
-                </a>
+                </Link>
                 <p class="subtitle has-text-grey"><em>par {{ recipe.user.name }}</em></p>
 
             <!-- Display the list of ingredients -->

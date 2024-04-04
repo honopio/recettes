@@ -42,16 +42,18 @@ npm run dev
 
 http://localhost:5173/
 
-(pas necessaire pour le prof) npm install bulma
-(pas necessaire pour le prof) npm install @fortawesome/fontawesome-free
+(pas necessaire pour le prof)
+npm install bulma
+npm install @fortawesome/fontawesome-free
+npm install vue-router
+npm install @inertiajs/inertia-vue3
+npm install @inertiajs/progress
 
 vue : single page application. une seule page chargée au début (meme si on change d'url)
  le serveur renvoie pas un html complet mais une struture de données (un json ici)
 le client remet en forme la vue. + rapide et - de travail pr le serveur
 
-npm install vue-router
-npm install @inertiajs/inertia-vue3
-npm install @inertiajs/progress
+
 
 CE QUON A FAIT :
 La barre de recherche permet de chercher les recettes qui contiennent
@@ -62,24 +64,7 @@ L'application a été réécrite avec inertia et vue.js
 
 les ingredients sont clickables
 
-je n'arrive pas à renvoyer la vue Recipes.vue dans le recipecontroller pour la fonction search()
-
-dans app.js : //  .component('Link', Link);
-pas necessaire?
-
-
-
-PROBLEME : FAIRE LE FORMULAIRE DE CONTACT AVEC INERTIA
-
-PROBLEME : <Link> component works fine when the route renders a blade file, but not when it renders a Vue component.
-see : Layout.vue navbar for links that should render a Vue file.
-see working links : Welcome.vue
-
-TODO :
-Make the ingredients display as their name in AdminEditRecette.vue (instead of the whole array, i.e. [object, object])
-see edit() in AdminController
-
-faire le formulaire en post pour le contact et pour l'edition d'une recette
+SPA quand on render une vue blade mais pas avec une vue inertia
 
 GUIDE DINSTALLATION :
 

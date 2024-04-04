@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use App\Models\Recipe;
 use Inertia\Inertia;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Log;
+use App\Models\Ingredient;
 
 
 class AdminController extends Controller
@@ -85,13 +84,12 @@ class AdminController extends Controller
         // Get the recipe and its associated ingredients
         $recipe = Recipe::with(['tags', 'ingredients'])->where('id', $id)->first();
 
-        // Extract ingredient names and convert them to a comma-separated string
-        // $ingredientNames = $recipe->ingredients->pluck('name')->implode(', ');
+        //dd the ingredients. correctly passed to the view.
+        // dd($recipe->ingredients->toArray());
 
         // Pass the recipe and ingredient names to the view
         return Inertia::render('AdminEditRecette', [
             'recipe' => $recipe,
-            // 'ingredientNames' => $ingredientNames,
         ]);
     }
 
@@ -104,8 +102,9 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'content' => 'required',
-            'price' => 'numeric|min:0'
-            //il faut gérer les ingrédients. voir AdminEditRecette.vue
+            'price' => 'numeric|min:0',
+            'ingredients' => 'array',
+
         ]);
 
         // Validation passed, update the recipe
@@ -115,7 +114,23 @@ class AdminController extends Controller
         $recipe->price = $validatedData['price'];
         $recipe->save();
 
-        //return the same vue with success message
+         // Update or create ingredients
+        foreach ($validatedData['ingredients'] as $ingredientData) {
+            // Check si l'ingredient existe dans la db
+            $ingredient = Ingredient::where('name', $ingredientData['name'])->first();
+            if (!$ingredient) {
+                // s'il existe pas, il est créé et sauvegardé, et updaté dans la table ingredient_recipe
+
+                $ingredient = new Ingredient();
+                $ingredient->name = $ingredientData['name'];
+                $ingredient->save();
+            }
+            // un ingredient modifié est attaché à la recette (table ingredient_recipe)
+            if (!$recipe->ingredients->contains($ingredient->id)) {
+                $recipe->ingredients()->attach($ingredient->id);
+            }
+        }
+
         return redirect()->back();
     }
 

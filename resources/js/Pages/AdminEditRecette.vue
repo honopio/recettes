@@ -26,10 +26,14 @@
 
             <div class="form-group">
                 <label for="ingredients" class="subtitle has-text-grey">Ingrédients</label>
-                <!-- textarea that displays the names of the ingredients of the recipe.
-                now that we've implemented a ingredients table, we need to change the form
-            -->
-                <!-- <textarea v-model="recipe.ingredients" name="ingredients" id="ingredients" class="form-control message-textarea" required rows="5"></textarea> -->
+
+                <!-- displays the names of the ingredients of the recipe. one text area for each ingredient of the recipe -->
+                <div v-for="(ingredient, index) in recipe.ingredients" :key="index">
+                    <input v-model="ingredient.name" type="text" name="ingredients" id="ingredients" class="form-control" required>
+                    <!-- button to remove this ingredient from the recipe -->
+                    <button @click="recipe.ingredients.splice(index, 1)" class="btn btn-primary subtitle has-text-grey rounded">Supprimer</button>
+                </div>
+
             </div>
             <br>
 
@@ -41,8 +45,9 @@
 
             <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Enregistrer</button>
         </form>
-                <!-- add a "retour" button that goes back to /admin/recettes -->
-                <br>
+
+        <!-- retour" button that goes back to /admin/recettes -->
+        <br>
         <button @click="$inertia.visit('/admin/recettes')" class="btn btn-primary subtitle has-text-grey rounded">Retour</button>
         <br>
     </div>
@@ -57,12 +62,12 @@ export default {
     data() {
         return {
             success: null,
-            recipeData: {
-                title: '',
-                content: '',
-                ingredients: '',
-                price: 0
-            }
+            // recipeData: {
+            //     title: '',
+            //     content: '',
+            //     // ingredients: [],
+            //     price: 0
+            // }
         };
     },
     methods: {
@@ -71,6 +76,7 @@ export default {
             this.$inertia.post(`/admin/recettes/edit/${this.recipe.id}`, this.recipe)
             this.success = `Vous avez modifié la recette ${this.recipe.title} avec succès !`;
         }
+
     },
     components: {
         Link,
