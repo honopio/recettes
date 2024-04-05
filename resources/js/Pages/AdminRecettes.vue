@@ -1,12 +1,5 @@
 <style>
-    .container {
-        margin : 20px;
-    }
-    a:hover {
-        text-decoration: underline;
-        text-underline-offset: 0.4em;
-    }
-
+    @import './../../css/stylesheet.css';
 </style>
 
 <template>

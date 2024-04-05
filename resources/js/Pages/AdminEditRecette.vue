@@ -14,13 +14,13 @@
         <form @submit.prevent="submitForm">
             <div class="form-group">
                 <label for="title" class="subtitle has-text-grey">Titre</label>
-                <input v-model="recipe.title" type="text" name="title" id="title" class="form-control" required>
+                <input v-model="recipe.title" type="text" name="title" id="title" class="form-control box" required>
             </div>
             <br>
 
             <div class="form-group">
-                <label for="content" class="subtitle has-text-grey">content</label>
-                <textarea v-model="recipe.content" name="content" id="content" class="form-control message-textarea" required rows="5"></textarea>
+                <label for="content" class="subtitle has-text-grey">Contenu</label>
+                <textarea v-model="recipe.content" name="content" id="content" class="form-control message-textarea box" required rows="5"></textarea>
             </div>
             <br>
 
@@ -29,7 +29,7 @@
 
                 <!-- displays the names of the ingredients of the recipe. one text area for each ingredient of the recipe -->
                 <div v-for="(ingredient, index) in recipe.ingredients" :key="index">
-                    <input v-model="ingredient.name" type="text" name="ingredients" id="ingredients" class="form-control" required>
+                    <input v-model="ingredient.name" type="text" name="ingredients" id="ingredients" class="form-control box" required>
                     <!-- button to remove this ingredient from the recipe -->
                     <button @click="recipe.ingredients.splice(index, 1)" class="btn btn-primary subtitle has-text-grey rounded">Supprimer</button>
                 </div>
@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <label for="price" class="subtitle has-text-grey">Prix</label>
-                <input v-model="recipe.price" type="number" name="price" id="price" class="form-control" required>
+                <input v-model="recipe.price" type="number" name="price" id="price" class="form-control box" required>
             </div>
             <br>
 
@@ -93,26 +93,9 @@ export default {
 </script>
 
 <style scoped>
-.form-group {
-    margin-bottom: 20px;
-}
-
-.subtitle {
-    display: block;
-}
-
-.message-textarea {
-    width: 80%;
-}
+    @import './../../css/stylesheet.css';
 
 
-/* style for buttons. with a border */
-.btn {
-    border: 1px solid #000;
-    padding: 10px 20px;
-    text-align: center;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 16px;
-}
+
+
 </style>

@@ -25,11 +25,6 @@ use App\Http\Controllers\CommentController;
 Route::get('/', [HomeController::class, 'index']);
 
 /* RECETTES */
-//inertia route doesn't work either ???
-// Route::get('/recettes', function () {
-//     return Inertia::render('Recettes');
-// });
-
 Route::get('/recettes', [RecettesController::class, 'index'])->name('recettes');
 Route::get('/recettes/search', [RecettesController::class, 'search']);
 Route::get('/recettes/{recipe}', [RecettesController::class, 'show'])->name('recettes.show');

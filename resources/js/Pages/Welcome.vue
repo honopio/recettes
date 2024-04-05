@@ -1,6 +1,6 @@
 <template>
     <Layout :title="'Home page'">
-    <div>
+    <div class="tout">
 
 
      <!-- If recipes is undefined or empty -->
@@ -82,14 +82,5 @@
   </script>
 
   <style scoped>
-  /* add margin right and left to the whole page*/
-    .columns {
-        margin-right: 1rem;
-        margin-left: 1rem;
-    }
-
-    .tag {
-        margin-right: 0.5rem;
-    }
-
+    @import './../../css/stylesheet.css';
   </style>

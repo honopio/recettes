@@ -41,8 +41,5 @@ export default {
 </script>
 
 <style scoped>
-    /* add margin to the whole page */
-    .tout {
-        margin : 5%;
-    }
+    @import './../../css/stylesheet.css';
 </style>

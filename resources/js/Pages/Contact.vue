@@ -68,51 +68,6 @@
   </script>
 
   <style scoped>
-  /* margin right and left to the whole page */
-  .tout {
-      margin: 0 5%;
-  }
+    @import './../../css/stylesheet.css';
 
-  .subtitle {
-      display: block;
-  }
-
-  textarea {
-      width: 80%; /* Set the width of the message textarea to 80% */
-  }
-
-  .btn { /* Style the submit button */
-      background-color: #f5f5f5;
-      color: #363636;
-      border: 1px solid #363636;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-  }
-
-  .btn:hover {
-      background-color: #a5a5a5;
-      color: #000000;
-  }
-
-  .box { /* Style the boxes. used for comments, input fields, textareas */
-      border: 1px solid #f5f5f5;
-      padding: 10px;
-      margin-bottom: 20px;
-  }
-
-  .box:hover {
-      border: 1px solid #363636;
-  }
-
-  .textarea {
-      width: 100%;
-      height: 100px;
-      padding: 10px;
-      margin-bottom: 20px;
-  }
-
-  .textarea:hover {
-      border: 1px solid #363636;
-  }
   </style>

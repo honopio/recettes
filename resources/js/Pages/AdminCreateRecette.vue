@@ -9,11 +9,11 @@
         <form @submit.prevent="createRecipe">
             <div class="form-group">
                 <label for="title" class="subtitle has-text-grey">Title</label>
-                <input v-model="title" type="text" id="title" class="form-control" required>
+                <input v-model="title" type="text" id="title" class="form-control box" required>
             </div>
             <div class="form-group">
                 <label for="content" class="subtitle has-text-grey">Content</label>
-                <textarea v-model="content" id="content" class="form-control message-textarea" required rows="10"></textarea>
+                <textarea v-model="content" id="content" class="form-control textarea box" required rows="10"></textarea>
             </div>
 
             <!-- SOCCUPER DES INGREDIENTS -->
@@ -25,10 +25,10 @@
 
             <div class="form-group">
                 <label for="price" class="subtitle has-text-grey">Price</label>
-                <input v-model="price" type="number" id="price" class="form-control" required>
+                <input v-model="price" type="number" id="price" class="form-control box" required>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Ajouter</button>
+            <button type="submit" class="btn btn-primary subtitle has-text-grey rounded box">Ajouter</button>
         </form>
     </div>
     </Layout>
@@ -71,27 +71,6 @@ export default {
 </script>
 
 <style scoped>
-.form-group {
-    margin-bottom: 20px;
-}
+    @import './../../css/stylesheet.css';
 
-.subtitle {
-    display: block;
-}
-
-.message-textarea {
-    width: 80%;
-}
-/* style for buttons. with a border */
-.btn {
-    border: 1px solid #000;
-    padding: 10px 20px;
-    text-align: center;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 16px;
-}
-.container {
-    margin: 20px;
-}
 </style>

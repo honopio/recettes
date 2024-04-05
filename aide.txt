@@ -71,3 +71,8 @@ GUIDE DINSTALLATION :
 npm install
 (dans composer.json il y a les dpdces php, et dans package.json il y a les dpdces inertia)
 
+PROBLEME :
+tous les liens soulignés when hover quand on passe par la page admin
+arrête d'être souligné quand on fait une recherche ds la barre de recherche (qd on fait une requête /recettes/search?recipe=blabla)
+faire une feuille des style
+
