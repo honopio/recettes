@@ -8,9 +8,10 @@ use Inertia\Inertia;
 
 class ContactController extends Controller
 {
-    function index(){ //loads the contact form template in the view
-      //  return view('contact');
-
+    /**
+     * loads the contact form template in the view
+     */
+    function index() {
       //return Contact.vue
     //  print_r(Inertia::render('Contact')); die;
       return Inertia::render('Contact');
@@ -25,14 +26,16 @@ class ContactController extends Controller
             'message' => 'required',
         ]);
 
-        // Create a new Contact record with the validated data
-        //Contact::create($validatedData);
-        Contact::create([
-            'email' => $request->email,
-            'message' => $request->message,
-        ]);
+        // Create a new contact message
+        $contact = new Contact();
+        // $contact->name = $request->input('name');
+        $contact->email = $request->input('email');
+        $contact->message = $request->input('message');
+        $contact->save();
+
+        return redirect()->back();
 
         // Return a response indicating success
-        return Inertia::render('Contact')->with('success', 'Message envoyé avec succès!');
+        //return Inertia::render('Contact')->with('success', 'Message envoyé avec succès!');
     }
 }

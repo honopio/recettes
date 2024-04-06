@@ -55,7 +55,6 @@ class AdminController extends Controller
             'price' => 'numeric|min:0'
         ]);
 
-
         //store the recipe
         $recipe = new Recipe;
         //USER ID CODE EN DUR
@@ -72,7 +71,7 @@ class AdminController extends Controller
             $recipe->ingredients()->attach($ingredient->id);
         }
         //return the same vue with success message
-        return redirect()->route('admin.recettes.index');
+        return redirect()->back();
     }
 
     /**

@@ -52,18 +52,18 @@ export default {
         };
     },
     methods: {
-            async createRecipe() {
-                console.log(this.newRecipeData)
-                try {
-        await this.$inertia.post(route('recettes.store'), this.newRecipeData);
-        this.success = `Vous avez créé la recette ${this.newRecipeData.title} avec succès !`;
-    } catch (error) {
-        console.error('Error creating recipe:', error);
-        if (error.response && error.response.data) {
-            console.error('Server response:', error.response.data);
-        }
-    }
-},
+        async createRecipe() {
+            console.log(this.newRecipeData)
+            try {
+                await this.$inertia.post(route('recettes.store'), this.newRecipeData);
+                this.success = `Vous avez créé la recette ${this.newRecipeData.title} avec succès !`;
+            } catch (error) {
+                console.error('Error creating recipe:', error);
+                if (error.response && error.response.data) {
+                    console.error('Server response:', error.response.data);
+                }
+            }
+        },
 
         addIngredient() {
             this.newRecipeData.ingredients.push({ name: '' });
@@ -73,9 +73,7 @@ export default {
         Layout,
         Link
     },
-    props: {
-        success: String,
-    },
+
 };
 </script>
 
