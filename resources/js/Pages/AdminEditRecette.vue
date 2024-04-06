@@ -1,3 +1,5 @@
+<!-- COMPONENT POUR FORMULAIRE DE MODIFICATION DE RECETTE -->
+
 <template>
 
     <Layout :title="'Admin : modification de recette'">

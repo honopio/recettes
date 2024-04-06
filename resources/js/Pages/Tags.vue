@@ -1,3 +1,5 @@
+<!--  COMPONENT POUR AFFICHER LA LISTE DES TAGS -->
+
 <template>
     <Layout :title="'Liste des tags'">
         <div class="tout">

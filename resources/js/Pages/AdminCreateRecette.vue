@@ -1,6 +1,8 @@
+<!-- COMPONENT POUR FORMULAIRE DE CREATION DE RECETTE -->
+
 <template>
     <Layout title="Admin : créer une recette">
-    <div class="container">
+    <div class="tout">
         <div v-if="success" class="alert alert-success">
             <p style="color: green; font-style: italic; font-size: 18px;">{{ success }}</p>
         </div>
@@ -22,15 +24,21 @@
                     <input v-model="ingredient.name" type="text" id="ingredients" class="form-control box" required>
                     <button @click="newRecipeData.ingredients.splice(index, 1)" class="btn btn-primary has-text-grey rounded" style="margin-left: 10px">Supprimer</button>
                 </div>
-                <br><button @click="addIngredient" class="btn btn-primary has-text-grey rounded">Add an ingredient</button>
-            </div>
-            <div class="form-group">
-                <label for="price" class="subtitle has-text-grey">Price</label>
-                <input v-model="newRecipeData.price" type="number" id="price" class="form-control box" required>
+                <br><button @click="addIngredient" class="btn btn-primary has-text-grey rounded">Ajouter un ingredient</button>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary subtitle has-text-grey rounded box">Ajouter</button>
+            <div class="form-group">
+                <label for="price" class="subtitle has-text-grey">Price</label>
+                <input v-model="newRecipeData.price" type="number" id="price" class="btn btn-primary form-control box" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary has-text-grey rounded box" style="font-size: 20px;">Poster la recette</button>
         </form>
+
+              <!-- retour" button that goes back to /admin/recettes -->
+            <br>
+            <button @click="$inertia.visit('/admin/recettes')" class="btn btn-primary  has-text-grey rounded">Retour</button>
+            <br>
     </div>
     </Layout>
 </template>

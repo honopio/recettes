@@ -1,3 +1,5 @@
+<!--  FORMULAIRE DE CONTACT -->
+
 <template>
         <Layout title="Formulaire de contact">
             <div class="tout">

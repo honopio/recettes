@@ -74,13 +74,6 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Montre un formulaire pour editer une recette
@@ -147,7 +140,7 @@ class AdminController extends Controller
 
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime la recette de la db
      */
     public function destroy(string $id)
     {

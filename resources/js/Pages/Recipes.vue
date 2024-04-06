@@ -1,3 +1,7 @@
+<!-- COMPONENT POUR LISTE DE RECETTES
+    Affiche les recettes dans une grille de 3 colonnes.
+    Sert pour la page de display des recettes et les pages de recherche. -->
+
 <template>
     <Layout>
     <div class="tout">

@@ -8,9 +8,15 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    /**
+     * page d'accueil qui display les 3 recettes les + recentes
+     */
     function index(){
-    //get first 3 recipes
-    $recipes = Recipe::with(['tags', 'user', 'ingredients'])->limit(3)->get();
+    //get 3 most recent recipes
+    $recipes = Recipe::with(['tags', 'user', 'ingredients'])
+                    ->latest()
+                    ->limit(3)
+                    ->get();
 
     //return Welcome.vue
     return Inertia::render('Welcome', [

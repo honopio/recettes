@@ -39,7 +39,7 @@ class RecettesController extends Controller
     }
 
     /**
-     * Chercher des recettes par leur titre, tags ou ingredients
+     * Chercher des recettes par leur titre, tags et/ou ingredients
      */
     public function search(Request $request) {
         $search = $request->input('recipe');

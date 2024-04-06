@@ -1,3 +1,5 @@
+<!--  PAGE ADMIN : LISTE DES RECETTES -->
+
 <style>
     @import './../../css/stylesheet.css';
 </style>

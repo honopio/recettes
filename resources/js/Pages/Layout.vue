@@ -1,3 +1,6 @@
+<!-- LAYOUT COMPONENT
+    Contient navbar + barre de recherche. -->
+
 <script>
 import { Link } from '@inertiajs/inertia-vue3';
 

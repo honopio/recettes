@@ -1,3 +1,5 @@
+<!--  COMPONENT POUR AFFICHER UNE SEULE RECETTE -->
+
 <template>
     <Layout>
     <div class="tout">

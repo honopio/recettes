@@ -1,3 +1,6 @@
+<!--  COMPONENT POUR PAGE D'ACCUEIL.
+    Affiche les 3 recettes les plus récentes. -->
+
 <template>
     <Layout :title="'Home page'">
     <div class="tout">
@@ -10,7 +13,7 @@
 
       <!-- Display recipes if available -->
       <template v-else>
-        <h1 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">Les 3 dernières recettes : </h1>
+        <h1 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">Les 3 recettes les plus récentes : </h1>
 
         <!-- TRACE -->
         <!-- <Link><h1 href="/recettes">Voir toutes les recettes</h1></Link> -->

@@ -9,6 +9,9 @@ use Inertia\Inertia;
 
 class TagController extends Controller
 {
+    /**
+     * display une liste des tags dans l'ordre alphabétique
+     */
     public function index()
     {
         // get les tags dans l'ordre alphabétique
@@ -19,15 +22,20 @@ class TagController extends Controller
         ]);
     }
 
-    public function show($name)
-    {
-        $recipes = Recipe::whereHas('tags', function ($query) use ($name) {
-            $query->where('name', $name);
-            })->get();
-        return view('tags/show', compact('recipes', 'name'));
-    }
+    // /**
+    //  * display les recettes associées à un tag donné
+    //  */
+    // public function show($name)
+    // {
+    //     $recipes = Recipe::whereHas('tags', function ($query) use ($name) {
+    //         $query->where('name', $name);
+    //         })->get();
+    //     return view('tags/show', compact('recipes', 'name'));
+    // }
 
-
+/**
+ * Chercher des recettes par leur tag
+ */
     public function searchByTag($tag) {
     // Get recipes associated with the given tag. i need every attribute of the recipes to pass it to the view.
     $recipes = Recipe::whereHas('tags', function ($query) use ($tag) {

@@ -7,7 +7,7 @@ use App\Models\Comment;
 use Inertia\Inertia;
 
 /**
- *  comments are displayed and created in the view of the recipe they belong to : recipes/single.blade.php
+ *  comments are displayed and created in the view of the recipe they belong to
  */
 class CommentController extends Controller
 {

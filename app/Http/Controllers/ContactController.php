@@ -9,7 +9,7 @@ use Inertia\Inertia;
 class ContactController extends Controller
 {
     /**
-     * loads the contact form template in the view
+     * montre le formulaire de contact
      */
     function index() {
       //return Contact.vue
@@ -18,7 +18,9 @@ class ContactController extends Controller
 
     }
 
-
+/**
+ * stores a new contact message in the db
+ */
     function store(Request $request) {
         $validatedData = $request->validate([
             'name' => 'required',
@@ -35,7 +37,5 @@ class ContactController extends Controller
 
         return redirect()->back();
 
-        // Return a response indicating success
-        //return Inertia::render('Contact')->with('success', 'Message envoyé avec succès!');
     }
 }
