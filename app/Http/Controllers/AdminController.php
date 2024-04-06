@@ -46,17 +46,19 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+       //dd($request->all());
         $request->validate([
             'title' => 'required',
             'content' => 'required',
-            // 'ingredients' => 'required',
+           // 'ingredients' => 'array',
             //price is a number, is min 0, and is not required
             'price' => 'numeric|min:0'
         ]);
 
+
         //store the recipe
         $recipe = new Recipe;
-//USER ID CODE EN DUR
+        //USER ID CODE EN DUR
         $recipe->user_id = 1;
         $recipe->title = $request->input('title');
         $recipe->content = $request->input('content');
@@ -64,6 +66,11 @@ class AdminController extends Controller
         $recipe->url = $request->input('title');
         $recipe->save();
 
+        //les ingredients sont créés s'ils n'existent pas déjà et sont attachés à la recette
+        foreach ($request->input('ingredients') as $ingredientData) {
+            $ingredient = Ingredient::firstOrCreate(['name' => $ingredientData['name']]);
+            $recipe->ingredients()->attach($ingredient->id);
+        }
         //return the same vue with success message
         return redirect()->route('admin.recettes.index');
     }
@@ -114,21 +121,26 @@ class AdminController extends Controller
         $recipe->price = $validatedData['price'];
         $recipe->save();
 
+        // Detach all ingredients from the recipe
+        $recipe->ingredients()->detach();
+
          // Update or create ingredients
         foreach ($validatedData['ingredients'] as $ingredientData) {
             // Check si l'ingredient existe dans la db
             $ingredient = Ingredient::where('name', $ingredientData['name'])->first();
             if (!$ingredient) {
                 // s'il existe pas, il est créé et sauvegardé, et updaté dans la table ingredient_recipe
-
                 $ingredient = new Ingredient();
                 $ingredient->name = $ingredientData['name'];
-                $ingredient->save();
+            } else {
+                // s'il existe, il est updaté
+                $ingredient->name = $ingredientData['name'];
             }
-            // un ingredient modifié est attaché à la recette (table ingredient_recipe)
-            if (!$recipe->ingredients->contains($ingredient->id)) {
-                $recipe->ingredients()->attach($ingredient->id);
-            }
+            $ingredient->save();
+
+            //on attache l'ingredient a la recette
+            $recipe->ingredients()->attach($ingredient->id);
+            // // un ingredient modifié est attaché à la recette (table ingredient_recipe)
         }
 
         return redirect()->back();

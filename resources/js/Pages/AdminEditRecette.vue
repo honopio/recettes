@@ -27,12 +27,15 @@
             <div class="form-group">
                 <label for="ingredients" class="subtitle has-text-grey">Ingrédients</label>
 
-                <!-- displays the names of the ingredients of the recipe. one text area for each ingredient of the recipe -->
-                <div v-for="(ingredient, index) in recipe.ingredients" :key="index">
-                    <input v-model="ingredient.name" type="text" name="ingredients" id="ingredients" class="form-control box" required>
-                    <!-- button to remove this ingredient from the recipe -->
-                    <button @click="recipe.ingredients.splice(index, 1)" class="btn btn-primary subtitle has-text-grey rounded">Supprimer</button>
+                <!-- display les noms des ingredients de la recette. un text area pour chaque ingredient  -->
+                <div v-for="(ingredient, index) in recipe.ingredients" :key="index" class="ingredient-item">
+                    <div style="display: flex; align-items: center;">
+                        <input v-model="ingredient.name" type="text" name="ingredients" id="ingredients" class="form-control box" required>
+                        <!-- button to remove this ingredient from the recipe -->
+                        <button @click="recipe.ingredients.splice(index, 1)" class="btn btn-primary has-text-grey rounded" style="margin-left: 10px">Supprimer</button>
+                    </div>
                 </div>
+                <br><button @click="addIngredient" class="btn btn-primary has-text-grey">Ajouter un ingredient</button>
 
             </div>
             <br>
@@ -43,12 +46,12 @@
             </div>
             <br>
 
-            <button type="submit" class="btn btn-primary subtitle has-text-grey rounded">Enregistrer</button>
+            <button type="submit" class="btn btn-primary  has-text-grey rounded">Enregistrer</button>
         </form>
 
         <!-- retour" button that goes back to /admin/recettes -->
         <br>
-        <button @click="$inertia.visit('/admin/recettes')" class="btn btn-primary subtitle has-text-grey rounded">Retour</button>
+        <button @click="$inertia.visit('/admin/recettes')" class="btn btn-primary  has-text-grey rounded">Retour</button>
         <br>
     </div>
     </Layout>
@@ -75,7 +78,10 @@ export default {
             // modifie la recette. soumission du formulaire
             this.$inertia.post(`/admin/recettes/edit/${this.recipe.id}`, this.recipe)
             this.success = `Vous avez modifié la recette ${this.recipe.title} avec succès !`;
-        }
+        },
+        addIngredient() {
+        this.recipe.ingredients.push({ name: '' });
+        },
 
     },
     components: {
@@ -94,7 +100,6 @@ export default {
 
 <style scoped>
     @import './../../css/stylesheet.css';
-
 
 
 

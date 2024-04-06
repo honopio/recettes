@@ -9,23 +9,24 @@
         <form @submit.prevent="createRecipe">
             <div class="form-group">
                 <label for="title" class="subtitle has-text-grey">Title</label>
-                <input v-model="title" type="text" id="title" class="form-control box" required>
+                <input v-model="newRecipeData.title" type="text" id="title" class="form-control box" required>
             </div>
             <div class="form-group">
                 <label for="content" class="subtitle has-text-grey">Content</label>
-                <textarea v-model="content" id="content" class="form-control textarea box" required rows="10"></textarea>
+                <textarea v-model="newRecipeData.content" id="content" class="form-control textarea box" required rows="10"></textarea>
             </div>
 
-            <!-- SOCCUPER DES INGREDIENTS -->
-
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label for="ingredients" class="subtitle has-text-grey">Ingredients</label>
-                <textarea v-model="ingredients" id="ingredients" class="form-control message-textarea" required></textarea>
-            </div> -->
-
+                <div v-for="(ingredient, index) in newRecipeData.ingredients" :key="index" style="display: flex; align-items: center;">
+                    <input v-model="ingredient.name" type="text" id="ingredients" class="form-control box" required>
+                    <button @click="newRecipeData.ingredients.splice(index, 1)" class="btn btn-primary has-text-grey rounded" style="margin-left: 10px">Supprimer</button>
+                </div>
+                <br><button @click="addIngredient" class="btn btn-primary has-text-grey rounded">Add an ingredient</button>
+            </div>
             <div class="form-group">
                 <label for="price" class="subtitle has-text-grey">Price</label>
-                <input v-model="price" type="number" id="price" class="form-control box" required>
+                <input v-model="newRecipeData.price" type="number" id="price" class="form-control box" required>
             </div>
             <br>
             <button type="submit" class="btn btn-primary subtitle has-text-grey rounded box">Ajouter</button>
@@ -45,28 +46,36 @@ export default {
             newRecipeData: {
             title: '',
             content: '',
-            price: null
+            price: null,
+            ingredients : []
             }
         };
     },
     methods: {
-        async createRecipe() {
-            try {
-                await this.$inertia.post(route('recettes.store'), {
-                    title: this.title,
-                    content: this.content,
-                    price: this.price
-                });
-                this.success = `Vous avez créé la recette ${this.title} avec succès !`;
-            } catch (error) {
-                console.error('Error creating recipe:', error);
-            }
+            async createRecipe() {
+                console.log(this.newRecipeData)
+                try {
+        await this.$inertia.post(route('recettes.store'), this.newRecipeData);
+        this.success = `Vous avez créé la recette ${this.newRecipeData.title} avec succès !`;
+    } catch (error) {
+        console.error('Error creating recipe:', error);
+        if (error.response && error.response.data) {
+            console.error('Server response:', error.response.data);
         }
+    }
+},
+
+        addIngredient() {
+            this.newRecipeData.ingredients.push({ name: '' });
+        },
     },
     components: {
         Layout,
         Link
-    }
+    },
+    props: {
+        success: String,
+    },
 };
 </script>
 
