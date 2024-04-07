@@ -52,19 +52,19 @@ class RecettesController extends Controller
         if ($search) {
 
             //search for recipes with the search term in the title. with tags, user, ingredients, and comments
-            $recipes = Recipe::with(['tags', 'user', 'ingredients'])
+            $recipes = Recipe::with(['tags', 'user', 'ingredients', 'comments', 'comments.user'])
             ->where('title', 'like', '%'.$search.'%')
             ->get();
 
             //add the recipes with the search term in the tags
             $recipes = $recipes->merge(Recipe::whereHas('tags', function($q) use ($search) {
                 $q->where('name', 'like', '%'.$search.'%');
-            })->with(['user', 'tags', 'ingredients'])->get());
+            })->with(['user', 'tags', 'ingredients', 'comments', 'comments.user'])->get());
 
             //add the recipes that have the search term in the ingredients
             $recipes = $recipes->merge(Recipe::whereHas('ingredients', function($q) use ($search) {
                 $q->where('name', 'like', '%'.$search.'%');
-            })->with(['user', 'tags', 'ingredients'])->get());
+            })->with(['user', 'tags', 'ingredients', 'comments', 'comments.user'])->get());
 
         } else {
             //on retourne les recettes qui ont un ingrédient en particulier dans les ingredients ou dans le titre

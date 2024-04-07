@@ -12,7 +12,7 @@
 
         <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Modifier la Recette</h1>
 
-        <!-- prevent pour éviter le page reload et soumettre le form avec JS-->
+        <!-- prevent sert à éviter le page reload et soumettre le form avec JS-->
         <form @submit.prevent="submitForm">
             <div class="form-group">
                 <label for="title" class="subtitle has-text-grey">Titre</label>
@@ -34,8 +34,8 @@
                     <div style="display: flex; align-items: center;">
                         <input v-model="ingredient.name" type="text" name="ingredients" id="ingredients" class="form-control box" required>
                         <!-- button to remove this ingredient from the recipe -->
-                        <button @click="recipe.ingredients.splice(index, 1)" class="btn btn-primary has-text-grey rounded" style="margin-left: 10px">Supprimer</button>
-                    </div>
+                        <!-- le type="button" permet de ne pas envoyer le formulaire quand on supprime un ingredient -->
+                        <button type="button" @click="recipe.ingredients.splice(index, 1)" class="btn btn-primary has-text-grey rounded" style="margin-left: 10px">Supprimer</button>                    </div>
                 </div>
                 <br><button @click="addIngredient" class="btn btn-primary has-text-grey">Ajouter un ingredient</button>
 
