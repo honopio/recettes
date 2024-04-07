@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use Inertia\Inertia;
+use App\Models\Recipe;
 
 /**
  *  comments are displayed and created in the view of the recipe they belong to
@@ -38,8 +39,11 @@ class CommentController extends Controller
         $comment->user_id = 1; //hardcoded for now. --------------------- NEEDS TO BE EDITED -------------------------------------
         $comment->save();
 
-        return back();
-    }
+        // Get the recipe with the new comment
+    $recipe = Recipe::with(['tags', 'user', 'ingredients', 'comments.user'])->where('id', $comment->recipe_id)->first();
 
+    // Return a full page visit with the recipe as a prop
+    return Inertia::render('Single', ['recipe' => $recipe, 'message' => 'Votre commentaire a bien été posté!']);
+    }
 
 }

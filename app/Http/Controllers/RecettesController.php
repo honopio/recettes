@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Recipe;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Log;
 
 class RecettesController extends Controller
 {
@@ -13,7 +14,7 @@ class RecettesController extends Controller
      */
     function index(){
         // Get all recipes with their associated TAGS, USER, and INGREDIENTS
-        $recipes = Recipe::with(['tags', 'user', 'ingredients'])->get();
+        $recipes = Recipe::with(['tags', 'user', 'ingredients', 'comments', 'comments.user'])->get();
 
         // Return Recipes.vue with all the recipes
         //return($recipes);
@@ -31,6 +32,8 @@ class RecettesController extends Controller
 
         // Fetch tags associated with the recipe
         // $tags = $recipe->tags()->pluck('name');
+        Log::info('Comments data structure:', $recipe->comments->toArray());
+
 
         return Inertia::render('Single', [
             'recipe' => $recipe

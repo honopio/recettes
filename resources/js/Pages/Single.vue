@@ -63,8 +63,12 @@
                     </form>
                 </div>
 
-                <div v-if="success" class="alert alert-success">
+                <!-- <div v-if="success" class="alert alert-success">
                     <p style="color: green; font-style: italic; font-size: 18px;">{{ success }}</p>
+                </div> -->
+                  <!-- Success message -->
+                <div v-if="message" class="notification is-success">
+                    {{ message }}
                 </div>
                 <br>
 
@@ -94,7 +98,6 @@ export default {
             success: null,
             isLoggedIn: false,
             content: '',
-
         };
     },
     methods: {
@@ -104,10 +107,20 @@ export default {
                     content: this.content,
                     recipe_id: this.recipe.id,
                 });
+                    // After a successful submission, add the new comment to the recipe.comments array
+    this.$set(this.recipe, 'comments', [...this.recipe.comments, {
+      id: response.data.id, // The ID of the new comment
+      user: { name: this.userName }, // The user who posted the comment
+      created_at: new Date().toISOString(), // The current date and time
+      content: this.commentContent, // The content of the comment
+    }]);
 
                 // Reset the content field and show success message
                 this.content = '';
                 this.success = `Vous avez ajouté un commentaire avec succès !`;
+
+                // Reload the page
+                location.reload();
             } catch (error) {
                 console.error('Error creating comment:', error);
             }
@@ -122,16 +135,12 @@ export default {
             type: Object,
             required: true,
         },
-
-
+        //pour passer un message de succès
+        message: {
+            type: String,
+            default: null
+        },
     }
-
-
 };
 </script>
 
-<style>
-/* import stylesheet */
-@import './../../css/stylesheet.css';
-
-</style>

@@ -18,10 +18,9 @@
           <!-- Loop through each recipe -->
           <div class="column is-4 mb-5" v-for="recipe in recipes" :key="recipe.id">
             <span><small class="has-text-grey-dark">{{ recipe.updated_at }}</small></span>
-            <Link :href="`/recettes/${recipe.url}`" class="has-text-grey-dark">
-                <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ recipe.title }}</h2>
-            </Link>
-
+      <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">
+        <a href="#" @click.prevent="console.log('Title clicked'); openModal(recipe)" class="has-text-grey-dark">{{ recipe.title }}</a>
+        </h2>
             <!-- Display the user who created the recipe. "user" a été passé dans le controller -->
             <p class="subtitle has-text-grey"><em>par {{ recipe.user.name }}</em></p>
 
@@ -58,23 +57,48 @@
       </template>
     </div>
     </Layout>
-  </template>
+        <!-- Modal component -->
+        <Modal :key="isModalOpen" :show="isModalOpen" :recipe="selectedRecipe" v-if="isModalOpen" @close="closeModal" />  </template>
 
   <script>
   import Layout from './Layout.vue';
   import { Link } from '@inertiajs/inertia-vue3';
+  import Modal from './Modal.vue';
 
   export default {
     name: 'Recipes.vue',
     components: {
         Link,
         Layout,
+        Modal,
     },
     props: {
       recipes: {
         type: Array,
         required: true
-      }
+      },
+    },
+    data() {
+      return {
+        isModalOpen: false,
+        selectedRecipe: null,
+      };
+    },
+    methods: {
+      openModal(recipe) {
+        // Open the modal and set the selected recipe
+        console.log('openModal called'); // Log a message when openModal is called
+        this.selectedRecipe = recipe;
+        this.isModalOpen = true;
+        console.log('selectedRecipe:', this.selectedRecipe); // Log the selected recipe (for debugging purposes
+      },
+      closeModal() {
+        // Close the modal
+        console.log('openModal called'); // Log a message when openModal is called
+
+        this.isModalOpen = false;
+        this.selectedRecipe = null;
+      },
     },
   }
   </script>

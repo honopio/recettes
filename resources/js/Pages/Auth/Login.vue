@@ -1,11 +1,12 @@
 <script setup>
 import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+// import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import Layout from './../Layout.vue';
 
 defineProps({
     canResetPassword: {
@@ -29,8 +30,15 @@ const submit = () => {
 };
 </script>
 
+<style>
+    @import 'resources/css/stylesheet.css';
+    body {
+        margin: 30px;
+    }
+</style>
+
 <template>
-    <GuestLayout>
+    <Layout title="Connexions">
         <Head title="Log in" />
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -90,5 +98,5 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
-    </GuestLayout>
+    </Layout>
 </template>
