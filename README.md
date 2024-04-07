@@ -1,48 +1,102 @@
-## Guide d'installation du projet 
-avec toutes les commandes à exécuter et les fichiers à configurer : git clone ... , composer install, npm install, modification du fichier .env, lancement des migrations, lancement du ou des serveurs, etc. 
+# Guide d'installation du projet 
 
-### Clone du git, Gestionnaire de dependances, environnement de travail et generation de l'application key 
-    git clone git@github.com:MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git
+### Clone du git
+```bash
+    git clone git@github.com:MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git #en ssh
+    git clone https://github.com/MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git #en https  
+```
+### Dépendances (hors composer install)
+voici les extensions PHP dont j'ai eu besoin avant de faire ```composer install``` :
+```bash
+sudo apt-get install php-gd #necessaire pour la manip d'images, pour le captcha
+sudo apt-get install php8.1-dom
+sudo apt-get install php8.1-xml
+sudo apt-get install php8.1-curl
+
+sudo service apache2 restart #redemarrer
+composer update
+```
+### Installation des dépendances, environnement de travail et génération de l'application key 
+```bash
+    composer require mews/captcha #ne devrait pas etre necessaire
     composer install
     cp .env.example .env    
     php artisan key:generate
+```
 
-### Inertia vue.js, installation et lancement du serveur
-    npm install
-    npm run dev
+### Base de données
+```bash
+touch database/database.sqlite
+```
+**Modifier .env :**
+```php
+DB_DATABASE=chemin/complet/vers/database/database.sqlite
+DB_CONNECTION=sqlite
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=larasite
+# DB_USERNAME=root
+# DB_PASSWORD=ic2a
+```
+**Lancement des migrations et seed :**
+```bash
+php artisan migrate
+php artisan db:seed 
+``` 
+## Fonctions implémentées : Branche main  
+- **Système de notation** : voir à ```/recettes/{recette.url}``` (en clickant sur le titre d'une recette).
+    - Une note possible par utilisateur et par recette. Noter plusieurs fois revient à modifier la ligne existante dans la table ratings.  
 
-### Captcha Service Provider
-    composer require mews/captcha
+- **Captcha** : dans le formulaire de contact (à ```/contact```, ou clicker sur "Contact" dans la navbar).
 
-## Setup Sqlite
-    DB_DATABASE=/ABSOLUTE_PATH/database/database.sqlite
-    # DB_CONNECTION=mysql
-    # DB_HOST=127.0.0.1
-    # DB_PORT=3306
-    # DB_DATABASE=larasite
-    # DB_USERNAME=root
-    # DB_PASSWORD=ic2a
+## Branche vue
+Inertia et Vue.js sont implémentés dans la branche vue.
+  
+### Installer NodeJS v20 et vite v10 
+```bash
+sudo apt install curl
+curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 
-### Lancement des migrations et seed
-    php artisan migrate
-    php artisan db:seed
+# à cause d'un conflit entre deux packages, j'ai du désinstaller libnode-dev
+sudo apt-get remove libnode-dev
 
-### Lancement du serveur
-    php artisan serve
+sudo apt-get install -y nodejs
+npm install
+npm install @vitejs/plugin-vue
+```  
+### Lancer les serveurs 
+```bash
+npm run dev
+php artisan serve
+```
 
-## Parties implémentées
-- Gestion des commentaires: formulaire + affichage liste
-- Formulaire Captcha pour protéger le formulaire de contact
-- Gestion des ingrédients et des tags
-- Barre de recherche fonctionnelle
-   - une recherche retourne toutes les recettes qui ont le contenu recherché dans leur titre, ingrédients, ou tags.
-- affichage des notes et post des notes
-TODO : AJAX + Admin
+### Changer de branche, migrer et seed à nouveau
+```bash
+git stash #au cas où il y ait des modifications à stash
+git checkout vue
+php artisan migrate:fresh --seed
+```
 
-pour chaque partie de brèves instructions de ce que je dois tester (URL des pages à visiter, boutons à cliquer, commandes à lancer dans un terminal, etc)
+## Fonctions implémentées : branche vue  
 
-## Fonctionnalités implémentées
-ex: 4 - Ajout de rôles utilisateurs - Puis détails de ce que je dois faire pour tester ou vérifier
+- **Barre de recherche** : Une recherche dans la barre de recherche (dans la navbar) affiche les recettes qui ont le contenu recherché dans leurs titres, leurs tags ou leurs ingrédients.  
 
-## Remarques
-Optionnel
+- **Gestion des commentaires** :  formulaire de création d'un commentaire et affichage de la liste des commentaires
+    - visible dans la vue Single.vue, à l'url ```/recettes/{recette.url}``` accessible en clickant sur le titre d'une recette  
+
+- **Gestion des tags** : 
+    - voir ```/tags``` (ou clicker sur "Tags" dans la navbar) pour afficher une liste des tags. Clicker sur un tag pour afficher toutes les recettes qui contiennent ce tag.    
+
+- **Gestion des ingrédients**
+    - **Tester la création et édition de recettes.** Se trouvent aux URL ```/admin/recettes/create``` et ```/admin/recettes/edit``` (page admin dispo dans la navbar)
+    - On peut ajouter, supprimer, modifier les ingrédients qu'on souhaite associer à la recette. Si un ingrédient n'existait pas dans la db, il est créé. S'il existait déjà, il est rattaché à la recette.
+
+- **CRUD des recettes améliorées**
+    - Dans les components Vue, on a lié les input aux data properties. Les vues contiennent les méthodes de soumission de formulaire.
+  
+- **Utilisation d'Inertia avec composants en vue**
+    - les routes pointent vers des controllers qui renvoient des vues Inertia. Ces vues inertia sont des composants Vue.js. Le composant Modal.vue, par exemple, est utilisé pour ouvrir une fenêtre modale qui display une recette.
+    - **clicker sur le titre d'une recette depuis la page d'accueil, ou depuis** ```/recettes```  pour voir la fenêtre modale.
+
+- **Utilisation du framework Vue.js**
+    - On n'utilise aucune vue blade dans cette branche. Les composants Vue.js utilisent les fonctionnalités de Vue.js, comme les propriétés réactives, les directives ```v-model```, ```v-for```, ```v-if```, ou encore les méthodes de soumissions de formulaire.  
