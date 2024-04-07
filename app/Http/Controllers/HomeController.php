@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     function index(){
     //get 3 most recent recipes
-    $recipes = Recipe::with(['tags', 'user', 'ingredients'])
+    $recipes = Recipe::with(['tags', 'user', 'ingredients', 'comments', 'comments.user'])
                     ->latest()
                     ->limit(3)
                     ->get();

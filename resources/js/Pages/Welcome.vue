@@ -15,17 +15,15 @@
       <template v-else>
         <h1 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">Les 3 recettes les plus récentes : </h1>
 
-        <!-- TRACE -->
-        <!-- <Link><h1 href="/recettes">Voir toutes les recettes</h1></Link> -->
         <br><br>
         <div class="columns is-multiline">
 
           <!-- Loop through each recipe -->
           <div class="column is-4 mb-5" v-for="recipe in recipes" :key="recipe.id">
             <span><small class="has-text-grey-dark">{{ recipe.updated_at }}</small></span>
-            <Link :href="`/recettes/${recipe.url}`" class="has-text-grey-dark">
-                <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">{{ recipe.title }}</h2>
-            </Link>
+            <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">
+        <a href="#" @click.prevent="console.log('Title clicked'); openModal(recipe)" class="has-text-grey-dark">{{ recipe.title }}</a>
+        </h2>
 
             <!-- Display the user who created the recipe. "user" a été passé dans le controller -->
             <p class="subtitle has-text-grey"><em>par {{ recipe.user.name }}</em></p>
@@ -62,24 +60,47 @@
       </template>
     </div>
     </Layout>
+      <!-- Modal component -->
+      <Modal :key="isModalOpen" :show="isModalOpen" :recipe="selectedRecipe" v-if="isModalOpen" @close="closeModal" />
+
+
   </template>
 
   <script>
   import Layout from './Layout.vue';
  import { Link } from '@inertiajs/inertia-vue3';
+    import Modal from './Modal.vue';
 
   export default {
     name: 'Recipes.vue',
     components: {
         Link,
         Layout,
+        Modal,
     },
     props: {
       recipes: {
         type: Array,
         required: true
       }
+    },
+    data() {
+      return {
+        isModalOpen: false,
+        selectedRecipe: null,
+      };
+    },
+    //methods from Recipes.vue
+    methods: {
+      openModal(recipe) {
+        this.selectedRecipe = recipe;
+        this.isModalOpen = true;
+      },
+      closeModal() {
+        this.isModalOpen = false;
+      }
     }
+
   }
   </script>
 
