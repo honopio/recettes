@@ -65,11 +65,18 @@ class AdminController extends Controller
         $recipe->url = $request->input('title');
         $recipe->save();
 
-        //les ingredients sont créés s'ils n'existent pas déjà et sont attachés à la recette
         foreach ($request->input('ingredients') as $ingredientData) {
-            $ingredient = Ingredient::firstOrCreate(['name' => $ingredientData['name']]);
-            $recipe->ingredients()->attach($ingredient->id);
-        }
+    $ingredientName = strtolower($ingredientData['name']);
+    $existingIngredient = Ingredient::whereRaw('LOWER(name) = ?', $ingredientName)->first();
+
+    if (!$existingIngredient) {
+        $ingredient = Ingredient::create(['name' => ucfirst($ingredientData['name'])]);
+    } else {
+        $ingredient = $existingIngredient;
+    }
+
+    $recipe->ingredients()->attach($ingredient->id);
+}
         //return the same vue with success message
         return redirect()->back();
     }
