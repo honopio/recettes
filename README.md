@@ -2,8 +2,8 @@
 
 ### Clone du git
 ```bash
-    git clone git@github.com:MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git #en ssh
-    git clone https://github.com/MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git #en https  
+git clone git@github.com:MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git #en ssh
+git clone https://github.com/MIASHS-UGA-PWS/pws-projet-2024-recettes-lecire_piolat.git #en https  
 ```
 ### Dépendances (hors composer install)
 voici les extensions PHP dont j'ai eu besoin avant de faire ```composer install``` :
@@ -18,10 +18,10 @@ composer update
 ```
 ### Installation des dépendances, environnement de travail et génération de l'application key 
 ```bash
-    composer require mews/captcha #ne devrait pas etre necessaire
-    composer install
-    cp .env.example .env    
-    php artisan key:generate
+composer require mews/captcha #ne devrait pas etre necessaire
+composer install
+cp .env.example .env    
+php artisan key:generate
 ```
 
 ### Base de données
@@ -43,15 +43,7 @@ DB_CONNECTION=sqlite
 php artisan migrate
 php artisan db:seed 
 ``` 
-## Fonctions implémentées : Branche main  
-- **Système de notation** : voir à ```/recettes/{recette.url}``` (en clickant sur le titre d'une recette).
-    - Une note possible par utilisateur et par recette. Noter plusieurs fois revient à modifier la ligne existante dans la table ratings.  
 
-- **Captcha** : dans le formulaire de contact (à ```/contact```, ou clicker sur "Contact" dans la navbar).
-
-## Branche vue
-Inertia et Vue.js sont implémentés dans la branche vue.
-  
 ### Installer NodeJS v20 et vite v10 
 ```bash
 sudo apt install curl
@@ -69,6 +61,16 @@ npm install @vitejs/plugin-vue
 npm run dev
 php artisan serve
 ```
+## Parties implémentées - Branche main
+- **Gestion des notes**  
+    - Les utilisateurs peuvent attribuer une note (de 1 à 5) à une recette et la modifier. Les notes sont enregistrées en base de données et affichées sur la page de chaque recette. La moyenne des notes est calculée et affichée pour chaque recette.  
+  
+- **Ajout d'images**
+    - Les utilisateurs peuvent upload une image pour chaque recette. Aller sur ```/recettes/url_de_la_recette``` en clickant sur le titre d'une recette, charger une image, et clicker sur le bouton "Upload l'image". L'image s'affiche ensuite sur le frontend.
+
+- **formulaire captcha** 
+    - Un formulaire captcha a été ajouté sur la page de commentaire et l'utilisateur doit saisir correctement le résultat de l'équation dans l'image pour valider le formulaire.
+    - Le package "mews/captcha" est déjà installé avec la commande composer require mais il faut installer les dépendances GD2 DLL (php_gd2.dll), php_fileinfo.dll et php_mbstring.dll dans le fichier php.ini si vous utilisez Windows.
 
 ### Changer de branche, migrer et seed à nouveau
 ```bash
@@ -89,7 +91,7 @@ php artisan migrate:fresh --seed
 
 - **Gestion des ingrédients**
     - **Tester la création et édition de recettes.** Se trouvent aux URL ```/admin/recettes/create``` et ```/admin/recettes/edit``` (page admin dispo dans la navbar)
-    - On peut ajouter, supprimer, modifier les ingrédients qu'on souhaite associer à la recette. Si un ingrédient n'existait pas dans la db, il est créé. S'il existait déjà, il est rattaché à la recette.
+    - Clicker sur les boutons "Ajouter" et "Supprimer" pour ajouter, supprimer, modifier les ingrédients qu'on souhaite associer à la recette. Si un ingrédient n'existait pas dans la db, il est créé. S'il existait déjà, il est rattaché à la recette.
 
 - **CRUD des recettes améliorées**
     - Dans les components Vue, on a lié les input aux data properties. Les vues contiennent les méthodes de soumission de formulaire.
@@ -100,3 +102,5 @@ php artisan migrate:fresh --seed
 
 - **Utilisation du framework Vue.js**
     - On n'utilise aucune vue blade dans cette branche. Les composants Vue.js utilisent les fonctionnalités de Vue.js, comme les propriétés réactives, les directives ```v-model```, ```v-for```, ```v-if```, ou encore les méthodes de soumissions de formulaire.  
+  
+## Remarques

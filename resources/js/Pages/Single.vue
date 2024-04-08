@@ -72,11 +72,6 @@
                 </div>
                 <br>
 
-                <!-- authentification pas implementee sur cette branche -->
-                <div v-if="!isLoggedIn" class="subtitle has-text-grey">
-                    <em>Connectez-vous pour ajouter un commentaire</em>
-                </div>
-
                 <div v-for="comment in recipe.comments" :key="comment.id" class="box">
                     <p class="is-size-5">{{ comment.user.name }}</p>
                     <p><small class="has-text-grey-dark">{{ comment.created_at }}</small></p>
@@ -109,7 +104,7 @@ export default {
                 });
                     // After a successful submission, add the new comment to the recipe.comments array
     this.$set(this.recipe, 'comments', [...this.recipe.comments, {
-      id: response.data.id, // The ID of the new comment
+      //id: response.data.id, // The ID of the new comment
       user: { name: this.userName }, // The user who posted the comment
       created_at: new Date().toISOString(), // The current date and time
       content: this.commentContent, // The content of the comment
@@ -143,4 +138,8 @@ export default {
     }
 };
 </script>
+<style>
+    @import './../../css/stylesheet.css';
+
+</style>
 

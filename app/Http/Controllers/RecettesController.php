@@ -28,7 +28,7 @@ class RecettesController extends Controller
      */
     public function show($recipe_url) {
         //get recipe with tags, user, ingredients, where url = $recipe_url
-        $recipe = Recipe::with(['tags', 'user', 'ingredients', 'comments.user'])->where('url', $recipe_url)->first();
+        $recipe = Recipe::with(['tags', 'user', 'ingredients', 'comments', 'comments.user'])->where('url', $recipe_url)->first();
 
         // Fetch tags associated with the recipe
         // $tags = $recipe->tags()->pluck('name');
