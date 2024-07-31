@@ -2,7 +2,7 @@
     Affiche les 3 recettes les plus récentes. -->
 
 <template>
-    <Layout :title="'Home page'">
+    <Layout title="Recettes">
     <div class="tout">
 
 
@@ -13,14 +13,14 @@
 
       <!-- Display recipes if available -->
       <template v-else>
-        <h1 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">Les 3 recettes les plus récentes : </h1>
+        <h1 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold" style="margin-left: 30px;">Les 3 recettes les plus récentes </h1>
 
         <br><br>
         <div class="columns is-multiline">
 
           <!-- Loop through each recipe -->
           <div class="column is-4 mb-5" v-for="recipe in recipes" :key="recipe.id">
-            <span><small class="has-text-grey-dark">{{ recipe.updated_at }}</small></span>
+            <span><small class="has-text-grey-dark">ajoutée le {{ recipe.updated_at }}</small></span>
             <h2 class="mt-2 mb-2 is-size-3 is-size-4-mobile has-text-weight-bold">
         <a href="#" @click.prevent="console.log('Title clicked'); openModal(recipe)" class="has-text-grey-dark">{{ recipe.title }}</a>
         </h2>

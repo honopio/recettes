@@ -2,7 +2,7 @@
 
 <template>
 
-    <Layout :title="'Admin : modification de recette'">
+    <Layout :title="'Admin : modifier une recette'">
     <div class="container">
         <!-- display success -->
         <div v-if="success" class="alert alert-success">
@@ -10,8 +10,8 @@
         </div>
         <br>
 
-        <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Modifier la Recette</h1>
-
+        <button @click="$inertia.visit('/admin/recettes')" class="btn btn-primary  has-text-grey rounded">Retour</button>
+        <br><br>
         <!-- prevent sert à éviter le page reload et soumettre le form avec JS-->
         <form @submit.prevent="submitForm">
             <div class="form-group">
@@ -22,7 +22,7 @@
 
             <div class="form-group">
                 <label for="content" class="subtitle has-text-grey">Contenu</label>
-                <textarea v-model="recipe.content" name="content" id="content" class="form-control message-textarea box" required rows="5"></textarea>
+                <textarea v-model="recipe.content" name="content" id="content" class="form-control textarea box" required rows="10"></textarea>
             </div>
             <br>
 
@@ -53,8 +53,7 @@
 
         <!-- retour" button that goes back to /admin/recettes -->
         <br>
-        <button @click="$inertia.visit('/admin/recettes')" class="btn btn-primary  has-text-grey rounded">Retour</button>
-        <br>
+
     </div>
     </Layout>
 </template>

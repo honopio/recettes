@@ -3,13 +3,13 @@
     Sert pour la page de display des recettes et les pages de recherche. -->
 
 <template>
-    <Layout>
+    <Layout title="Recettes">
     <div class="tout">
 
       <br>
       <!-- If recipes is undefined or empty -->
       <template v-if="!recipes || recipes.length === 0">
-        <p>No recipes found</p>
+        <p class="is-size-3" style="text-align: center;">No recipes found</p>
       </template>
 
       <!-- Display recipes if available -->

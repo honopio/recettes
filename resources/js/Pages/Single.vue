@@ -25,7 +25,7 @@
 
             <!-- Display the content of the recipe -->
             <br><br>
-            <p class="subtitle has-text-grey">{{ recipe.content }}...</p>
+            <p class="subtitle has-text-grey">{{ recipe.content }}</p>
 
             <!-- Display the tags -->
             <p class="subtitle has-text-grey">

@@ -5,15 +5,14 @@
 </style>
 
 <template>
-    <Layout :title="'Administrateur : liste des recettes'">
-    <div>
+    <Layout :title="'Admin : liste des recettes'">
+    <div class="tout">
         <div v-if="success" class="alert alert-success">
             <p style="color: green; font-style: italic; font-size: 18px;">{{ success }}</p>
         </div>
         <br>
         <br><br>
         <div class="container">
-            <h1 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Liste des Recettes</h1>
 
             <!-- href to this route : Route::get('/admin/recettes/create', [AdminController::class, 'create']); -->
             <Link :href="`/admin/recettes/create`">Ajouter une recette</Link>
@@ -83,14 +82,6 @@ export default {
         editRoute(id) {
             return "{{ route('recettes.edit', '') }}/" + id;
         },
-        // deleteRoute(id) {
-        //     return "{{ route('recettes.destroy', '') }}/" + id;
-        // },
-        // confirmDelete(id) {
-        //     if (confirm('Are you sure you want to delete this recette?')) {
-        //         document.getElementById(`delete-form-${id}`).submit();
-        //     }
-        // },
 
     async deleteRecipe(id) {
         if (confirm('Êtes-vous sûr de vouloir supprimer cette recette?')) {

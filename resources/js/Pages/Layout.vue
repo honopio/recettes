@@ -33,7 +33,6 @@ export default {
                 </div>
                 <div class="navbar-menu">
                     <div class="navbar-start">
-                        <!-- make it go to root -->
                         <Link class="navbar-item" href="/">Accueil</Link>
                         <Link class="navbar-item" href="/recettes">Recettes</Link>
                         <Link class="navbar-item" href="/contact">Contact</Link>
@@ -50,7 +49,7 @@ export default {
                                     <input class="input" id="search-input" type="search" placeholder="Search" aria-label="Search" name="recipe">
                                 </div>
                                 <div class="control">
-                                    <button id="search-button" class="button" type="submit">
+                                    <button id="search-button" class="button" type="submit" style="height:40px">
                                         <i class="fas fa-search"></i>
                                     </button>
                                 </div>
@@ -65,8 +64,7 @@ export default {
             <div class="container">
                 <div class="mb-6 columns is-multiline is-centered">
                     <div class="column is-8 has-text-centered">
-                        <span class="has-text-grey-dark">{{ title }}</span>
-                        <h2 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Recettes</h2>
+                        <h2 class="mt-2 mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">{{ title }}</h2>
                         <p class="subtitle has-text-grey">Le meilleur de la cuisine</p>
                     </div>
                 </div>
