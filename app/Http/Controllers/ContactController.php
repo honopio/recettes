@@ -12,10 +12,7 @@ class ContactController extends Controller
      * montre le formulaire de contact
      */
     function index() {
-      //return Contact.vue
-    //  print_r(Inertia::render('Contact')); die;
       return Inertia::render('Contact');
-
     }
 
 /**
@@ -26,11 +23,11 @@ class ContactController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'message' => 'required',
+            'captcha' => 'required|captcha'
         ]);
 
         // Create a new contact message
         $contact = new Contact();
-        // $contact->name = $request->input('name');
         $contact->email = $request->input('email');
         $contact->message = $request->input('message');
         $contact->save();
