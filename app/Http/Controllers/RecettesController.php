@@ -30,11 +30,6 @@ class RecettesController extends Controller
         //get recipe with tags, user, ingredients, where url = $recipe_url
         $recipe = Recipe::with(['tags', 'user', 'ingredients', 'comments', 'comments.user'])->where('url', $recipe_url)->first();
 
-        // Fetch tags associated with the recipe
-        // $tags = $recipe->tags()->pluck('name');
-        Log::info('Comments data structure:', $recipe->comments->toArray());
-
-
         return Inertia::render('Single', [
             'recipe' => $recipe
         ]);

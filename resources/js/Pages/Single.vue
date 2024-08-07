@@ -59,18 +59,25 @@
                                 <textarea v-model="content" class="textarea" name="content" placeholder="Ecrivez votre commentaire"></textarea>
                             </div>
                         </div>
+                        <br>
+                        <div class="field">
+                            <div class="control">
+                                <a @click="loadCaptcha" class="has-text-grey">Charger un autre captcha</a><br><br>
+                                <p v-html="captchaImage"></p><br>
+                                <label for="captcha" class="subtitle has-text-grey">Saisissez le résultat : </label>
+                                <input v-model="captcha" type="text" name="captcha" id="captcha" class="form-control box" required>
+                            </div>
+                        </div>
                         <button type="submit" class="btn subtitle has-text-grey border-radius=5px">Envoyer</button>
                     </form>
                 </div>
 
-                <!-- <div v-if="success" class="alert alert-success">
-                    <p style="color: green; font-style: italic; font-size: 18px;">{{ success }}</p>
-                </div> -->
-                  <!-- Success message -->
-                <div v-if="message" class="notification is-success">
-                    {{ message }}
+                <!-- Success message -->
+                <div v-if="feedback" class="notification">
+                    {{ feedback }}
                 </div>
                 <br>
+
 
                 <div v-for="comment in recipe.comments" :key="comment.id" class="box">
                     <p class="is-size-5">{{ comment.user.name }}</p>
@@ -86,40 +93,54 @@
 <script>
 import Layout from './Layout.vue';
 import { Link } from '@inertiajs/inertia-vue3';
+import axios from 'axios';
 
 export default {
     data() {
         return {
-            success: null,
             isLoggedIn: false,
             content: '',
+            captcha: '',
+            captchaImage: '',
         };
     },
+
     methods: {
         async createComment() {
             try {
                 const response = await this.$inertia.post(route('comments.store', { recipe: this.recipe.id }), {
                     content: this.content,
                     recipe_id: this.recipe.id,
+                    captcha: this.captcha,
                 });
-                    // After a successful submission, add the new comment to the recipe.comments array
-    this.$set(this.recipe, 'comments', [...this.recipe.comments, {
-      //id: response.data.id, // The ID of the new comment
-      user: { name: this.userName }, // The user who posted the comment
-      created_at: new Date().toISOString(), // The current date and time
-      content: this.commentContent, // The content of the comment
-    }]);
 
-                // Reset the content field and show success message
+                // After a successful submission, add the new comment to the recipe.comments array
+                this.recipe.comments.push(response.data);
+
                 this.content = '';
-                this.success = `Vous avez ajouté un commentaire avec succès !`;
+                this.captcha = '';
+                this.loadCaptcha();
 
                 // Reload the page
                 location.reload();
-            } catch (error) {
-                console.error('Error creating comment:', error);
+            } catch (err) {
+                console.error('Error creating comment:', err);
+                this.loadCaptcha();
             }
         },
+
+        async loadCaptcha() {
+            try {
+                const response = await axios.get('/captcha', { responseType: 'blob' });
+                const url = URL.createObjectURL(response.data);
+                this.captchaImage = `<img src="${url}" alt="Captcha Image" />`;
+            } catch (err) {
+                console.error('Error fetching captcha:', err);
+            }
+        },
+    },
+    mounted() {
+        this.loadCaptcha();
     },
     components: {
         Link,
@@ -131,7 +152,7 @@ export default {
             required: true,
         },
         //pour passer un message de succès
-        message: {
+        feedback: {
             type: String,
             default: null
         },

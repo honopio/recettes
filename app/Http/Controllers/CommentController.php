@@ -30,8 +30,14 @@ class CommentController extends Controller
     function store(Request $request){
         $request->validate([
             'content' => 'required',
-            'recipe_id' => 'required'
+            'recipe_id' => 'required',
+            'captcha' => 'required|captcha',
         ]);
+
+        if (!$request->input('captcha')) {
+            $recipeback = Recipe::with(['tags', 'user', 'ingredients', 'comments.user'])->where('id', $request->input('recipe_id'))->first();
+            return Inertia::render('Single', ['recipe' => $recipeback, 'feedback' => 'Le captcha n\'a pas été validé. Veuillez réessayer.']);
+        }
 
         $comment = new Comment();
         $comment->content = $request->input('content');
@@ -43,7 +49,7 @@ class CommentController extends Controller
     $recipe = Recipe::with(['tags', 'user', 'ingredients', 'comments.user'])->where('id', $comment->recipe_id)->first();
 
     // Return a full page visit with the recipe as a prop
-    return Inertia::render('Single', ['recipe' => $recipe, 'message' => 'Votre commentaire a bien été posté!']);
+    return Inertia::render('Single', ['recipe' => $recipe, 'feedback' => 'Votre commentaire a bien été posté!']);
     }
 
 }
