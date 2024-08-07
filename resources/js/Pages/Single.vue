@@ -73,11 +73,16 @@
                 </div>
 
                 <!-- Success message -->
-                <div v-if="feedback" class="notification">
+                <div v-if="feedback" class="notification is-success">
                     {{ feedback }}
                 </div>
                 <br>
 
+                <!-- Error message -->
+                <div v-if="errorMessage" class="notification is-danger">
+                    {{ errorMessage }}
+                </div>
+                <br>
 
                 <div v-for="comment in recipe.comments" :key="comment.id" class="box">
                     <p class="is-size-5">{{ comment.user.name }}</p>
@@ -102,6 +107,7 @@ export default {
             content: '',
             captcha: '',
             captchaImage: '',
+            errorMessage: '',
         };
     },
 
@@ -119,12 +125,14 @@ export default {
 
                 this.content = '';
                 this.captcha = '';
+                this.errorMessage = '';
                 this.loadCaptcha();
 
                 // Reload the page
                 location.reload();
             } catch (err) {
                 console.error('Error creating comment:', err);
+                this.errorMessage = 'Le captcha est incorrect. Veuillez réessayer.';
                 this.loadCaptcha();
             }
         },
